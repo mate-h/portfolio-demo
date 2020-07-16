@@ -1,4 +1,4 @@
-# Deliverables
+# User journeys
 ## User scenario 1
 Adam, the head of the HR department at a consulting company would like to schedule an event for a massive holi powder party at their headquarters. Once he has sent out the invitations to a list of emails, he will know with how much holi powder to prepare based on the RSVP of the guests. The party turned out to be great, and he would like to know what to change for next time, so he reads his guests' feedback in the comment section of the event.
 

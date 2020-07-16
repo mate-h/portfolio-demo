@@ -1,4 +1,4 @@
-# Assignment
+# Assignment:  Design documentation
 Design a calendar invitation system. The admin can invite a user to an event and gather their feedback (example: attending, comments)
 Define the technical architecture, user scenario, security risk, scope...
 
@@ -8,6 +8,12 @@ Since calendar invitation systems have a very wide range of use cases, I will li
 
 ## User research
 I now do research and recap the listed topics in the assigment.  
+*Search term: "design documentation"*
+> https://xd.adobe.com/ideas/principles/web-design/design-documentation/  
+> https://medium.com/deliveroo-design/the-power-of-the-design-doc-fbf5070163f8
+
+This article gave me a good overview as to what types of documents does a design documentation consists of. It looks like this would take a _lot_ of work, and is usually done by a team of people. 
+
 *Search term: "user scenario examples"*  
 > https://www.interaction-design.org/literature/topics/user-scenarios  
 
