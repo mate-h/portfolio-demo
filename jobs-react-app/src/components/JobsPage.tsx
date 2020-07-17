@@ -10,7 +10,6 @@ export function JobsPage() {
   const { loading, error } = useFetchListPositions({
     onNewData: (curr, data) => {
       merge({ path: "jobPostings", data, prop: "id" });
-      console.log(curr, data.length);
     },
   });
 

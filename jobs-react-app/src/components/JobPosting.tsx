@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Link from "@material-ui/core/Link";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useLocation } from "react-router-dom";
 
 export type JobPostingProps = {
   id: string;
@@ -23,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export function JobPosting(props: JobPostingProps) {
   const jobPosting = useJobPosting({ id: props.id });
   const classes = useStyles();
+  const location = useLocation();
   if (!jobPosting) return <></>;
 
   const dateFormat = (date: string) =>
@@ -61,7 +62,14 @@ export function JobPosting(props: JobPostingProps) {
     </>
   );
   const PrimaryText: React.ReactNode = (
-    <Link component={RouterLink} to={`/job/${jobPosting.id}`} color="primary">
+    <Link
+      component={RouterLink}
+      to={{
+        pathname: `/job/${jobPosting.id}`,
+        state: { from: location.pathname },
+      }}
+      color="primary"
+    >
       {jobPosting.title}
     </Link>
   );

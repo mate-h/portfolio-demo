@@ -38,6 +38,17 @@ const theme = createMuiTheme({
       default: "#fafafa",
     },
   },
+  overrides: {
+    MuiTypography: {
+      // correct material spec
+      overline: {
+        fontSize: "0.625rem",
+        fontWeight: 500,
+        letterSpacing: "calc(1.5 / 14 * 1em)",
+        lineHeight: 1.6,
+      },
+    },
+  },
 });
 
 export default theme;

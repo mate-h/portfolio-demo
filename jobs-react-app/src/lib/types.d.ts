@@ -26,6 +26,12 @@ declare module "GitHubJobs" {
   export type ListPositionsParams = ListPositionsBaseParams &
     ((LatLongLocationParams | StringLocationParams) | {});
 
+  export type GetJobPostingParams = {
+    id: string;
+    /** Set to 'true' to get the description and how_to_apply fields as Markdown. */
+    markdown?: boolean;
+  };
+
   export interface API {
     /**
      * Search for jobs by term, location, full time vs part time, or any combination of the three. All parameters are optional.
@@ -34,6 +40,12 @@ declare module "GitHubJobs" {
      * @returns JSON representation of any search result or job listing
      */
     listPositions: (params?: ListPositionsParams) => ListPositionsResponse;
+    /**
+     * Retrieve the JSON representation of a single job posting.
+     *
+     * @param params The url and GET parameters for this request
+     */
+    getJobPosting: (params?: GetJobPostingParams) => JobPosting;
   }
 
   export type ListPositionsResponse = JobPosting[];

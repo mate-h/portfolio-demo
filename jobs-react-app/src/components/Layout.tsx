@@ -31,7 +31,7 @@ function Copyright() {
 export const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const classes = useStyles();
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
           Create React App v4-beta example with TypeScript
