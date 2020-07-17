@@ -43,7 +43,7 @@ declare module "GitHubJobs" {
     id: string;
     type: string;
     url: string;
-    created_at: Date;
+    created_at: string;
     company: string;
     company_url?: string;
     location: string;
