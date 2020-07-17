@@ -1,18 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useFetchListPositions, useAction, useStore } from "../lib/hooks";
 import { JobPosting } from "./JobPosting";
 import { merge as mergeAction } from "../lib/actions";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      backgroundColor: theme.palette.background.paper,
-      borderRadius: theme.shape.borderRadius,
-    },
-  })
-);
 
 export function JobsPage() {
   const { state } = useStore();
@@ -24,10 +14,9 @@ export function JobsPage() {
     },
   });
 
-  const classes = useStyles();
   return (
     <>
-      <List className={classes.root}>
+      <List>
         {Object.values(state.jobPostings).map((jobPosting) => (
           <JobPosting key={jobPosting.id} id={jobPosting.id} />
         ))}

@@ -5,6 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Link from "@material-ui/core/Link";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import { Link as RouterLink } from "react-router-dom";
 
 export type JobPostingProps = {
   id: string;
@@ -60,7 +61,7 @@ export function JobPosting(props: JobPostingProps) {
     </>
   );
   const PrimaryText: React.ReactNode = (
-    <Link color="primary" href={jobPosting.url}>
+    <Link component={RouterLink} to={`/job/${jobPosting.id}`} color="primary">
       {jobPosting.title}
     </Link>
   );
