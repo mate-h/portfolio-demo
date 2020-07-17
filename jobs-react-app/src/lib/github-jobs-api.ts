@@ -3,6 +3,7 @@ import useFetch, { UseFetch, IncomingOptions } from "use-http";
 import { listPositionsRequestUrl, getPositionsRequestUrl } from "./config";
 
 type StatefulHook<T extends (...args: any) => any> = (
+  options?: IncomingOptions,
   ...params: Parameters<T>
 ) => UseFetch<ReturnType<T>>;
 
@@ -11,10 +12,15 @@ const fetchOptions: IncomingOptions = {
   persist: true,
 };
 
-export const useListPositions: StatefulHook<API["listPositions"]> = (
+export const useFetchListPositions: StatefulHook<API["listPositions"]> = (
+  options,
   params
 ) => {
   const url = new URL(listPositionsRequestUrl);
   url.search = new URLSearchParams(params as any).toString();
-  return useFetch<ListPositionsResponse>(url.toString(), fetchOptions, []);
+  return useFetch<ListPositionsResponse>(
+    url.toString(),
+    { ...fetchOptions, ...options },
+    []
+  );
 };

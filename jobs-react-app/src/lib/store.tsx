@@ -1,7 +1,7 @@
 import React, { useReducer, Dispatch, useContext } from "react";
-import { getType, set } from "./actions";
+import { getType, set, merge } from "./actions";
 import * as icepick from "icepick";
-import { ListPositionsResponse } from "GitHubJobs";
+import { ListPositionsKeyedResponse } from "GitHubJobs";
 
 export interface Action<T> {
   type: string;
@@ -9,11 +9,11 @@ export interface Action<T> {
 }
 
 export interface StoreState {
-  jobPostings: ListPositionsResponse;
+  jobPostings: ListPositionsKeyedResponse;
 }
 
 const initialState: StoreState = icepick.freeze({
-  jobPostings: [],
+  jobPostings: {},
 });
 
 export interface Store {
@@ -35,10 +35,22 @@ const makepath = (path: string | string[]) =>
 
 function reducer(state: StoreState, action: Action<any>): StoreState {
   const { type, payload } = action;
+  let path;
   switch (type) {
     case getType(set):
-      let path = makepath(payload.path);
+      path = makepath(payload.path);
       return icepick.assocIn(state, path, payload.data);
+    case getType(merge):
+      path = makepath(payload.path);
+      const prop = payload.prop;
+      const newData = payload.data.reduce((acc: any, curr: any) => {
+        return { [curr[prop]]: curr, ...acc };
+      }, {});
+      return icepick.assocIn(
+        state,
+        path,
+        icepick.merge(newData, icepick.getIn(state, path))
+      );
   }
   return state;
 }

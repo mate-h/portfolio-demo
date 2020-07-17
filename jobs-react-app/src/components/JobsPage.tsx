@@ -1,13 +1,21 @@
-import React from "react";
-import { useListPositions } from "../lib/hooks";
+import React, { useEffect } from "react";
+import { useFetchListPositions, useAction, useStore } from "../lib/hooks";
 import { JobPosting } from "./JobPosting";
+import { merge as mergeAction } from "../lib/actions";
 
 export function JobsPage() {
-  const { loading, error, data = [] } = useListPositions();
+  const { state } = useStore();
+  const merge = useAction(mergeAction);
+  const { loading, error } = useFetchListPositions({
+    onNewData: (curr, data) => {
+      merge({ path: "jobPostings", data, prop: "id" });
+      console.log(curr, data);
+    },
+  });
 
   return (
     <>
-      {data.map((jobPosting) => (
+      {Object.values(state.jobPostings).map((jobPosting) => (
         <JobPosting key={jobPosting.id} id={jobPosting.id} />
       ))}
     </>
