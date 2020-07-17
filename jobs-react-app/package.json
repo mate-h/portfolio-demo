@@ -4,12 +4,13 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "latest",
-    "@types/react": "latest",
-    "@types/react-dom": "latest",
+    "icepick": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-router-dom": "latest",
     "react-scripts": "latest",
-    "typescript": "latest"
+    "typescript": "latest",
+    "use-http": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,5 +29,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/icepick": "latest"
   }
 }
