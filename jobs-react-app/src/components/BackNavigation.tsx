@@ -1,5 +1,5 @@
 import React from "react";
-import BackIcon from "./BackIcon";
+import { BackIcon } from ".";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink, useHistory, useLocation } from "react-router-dom";

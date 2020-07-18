@@ -1,8 +1,9 @@
 import React from "react";
 import Interweave from "interweave";
 import { useParams } from "react-router-dom";
-import { BackNavigation } from "./BackNavigation";
-import { Typography } from "@material-ui/core";
+import { BackNavigation, CompanyLogo } from ".";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
 import { useJobPosting, useFetchJobPosting, useAction } from "../lib/hooks";
 import { set as setAction } from "../lib/actions";
 
@@ -19,20 +20,24 @@ export function JobDetailPage() {
     { id }
   );
   const jobPosting = useJobPosting({ id });
+
   if (!jobPosting) return <></>;
 
   return (
-    <div style={{ padding: 16 }}>
+    <Box p={2}>
       <div>
         <BackNavigation fallback="/" />
       </div>
-      <Typography color="textSecondary" variant="overline">
-        {jobPosting.type}
-        {jobPosting.type && ` / `}
-        {jobPosting.location}
-      </Typography>
-      <Typography variant="h6">{jobPosting.title}</Typography>
+      {jobPosting.company_logo && <CompanyLogo id={id} />}
+      <div>
+        <Typography color="textSecondary" variant="overline">
+          {jobPosting.type}
+          {jobPosting.type && ` / `}
+          {jobPosting.location}
+        </Typography>
+        <Typography variant="h6">{jobPosting.title}</Typography>
+      </div>
       <Interweave content={jobPosting.description} />
-    </div>
+    </Box>
   );
 }
