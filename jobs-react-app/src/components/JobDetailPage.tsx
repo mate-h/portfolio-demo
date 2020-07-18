@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 
 import React from "react";
+import Interweave from "interweave";
 import { BackNavigation } from "./BackNavigation";
 import { Typography } from "@material-ui/core";
 import { useJobPosting, useFetchJobPosting, useAction } from "../lib/hooks";
@@ -31,7 +32,7 @@ export function JobDetailPage() {
         {jobPosting.location}
       </Typography>
       <Typography variant="h6">{jobPosting.title}</Typography>
-      Job detail page<code>{id}</code>
+      <Interweave content={jobPosting.description} />
     </div>
   );
 }
