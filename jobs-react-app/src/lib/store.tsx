@@ -1,19 +1,24 @@
 import React, { useReducer, Dispatch, useContext } from "react";
 import { getType, set, merge } from "./actions";
 import * as icepick from "icepick";
-import { ListPositionsKeyedResponse } from "GitHubJobs";
+import { JobPosting } from "GitHubJobs";
 
 export interface Action<T> {
   type: string;
   payload: T;
 }
 
+type JobPostingsState = { [id: string]: JobPosting };
+type JobPostingsDetailState = { [id: string]: JobPosting };
+
 export interface StoreState {
-  jobPostings: ListPositionsKeyedResponse;
+  jobPostings: JobPostingsState;
+  jobPostingsDetail: JobPostingsDetailState;
 }
 
 const initialState: StoreState = icepick.freeze({
   jobPostings: {},
+  jobPostingsDetail: {},
 });
 
 export interface Store {
@@ -58,6 +63,10 @@ function reducer(state: StoreState, action: Action<any>): StoreState {
 export function StoreProvider(props: any) {
   const [state, dispatch] = useReducer(reducer, initialState);
   const value = { state, dispatch };
+
+  // Uncomment this line to inspect store state
+  console.log("store state", state);
+
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }
 

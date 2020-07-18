@@ -49,7 +49,6 @@ declare module "GitHubJobs" {
   }
 
   export type ListPositionsResponse = JobPosting[];
-  export type ListPositionsKeyedResponse = { [id: string]: JobPosting };
 
   export type JobPosting = {
     id: string;

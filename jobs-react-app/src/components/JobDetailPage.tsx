@@ -9,10 +9,11 @@ import { set as setAction } from "../lib/actions";
 export function JobDetailPage() {
   const { id } = useParams();
   const set = useAction(setAction);
+  // TODO: handle error state
   const { loading, error } = useFetchJobPosting(
     {
       onNewData: (curr, data) => {
-        set({ path: `jobPostings.${id}`, data });
+        set({ path: `jobPostingsDetail.${id}`, data });
       },
     },
     { id }

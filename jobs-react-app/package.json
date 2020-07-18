@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "latest",
+    "@material-ui/lab": "^4.0.0-alpha.56",
     "icepick": "latest",
     "interweave": "latest",
     "react": "latest",
