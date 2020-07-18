@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   useFetchListPositions,
   useAction,
   useJobPostings,
   useSearchForm,
-  usePrevious,
 } from "../lib/hooks";
 import { JobPosting, JobPostingSkeleton } from ".";
 import { merge as mergeAction, pick as pickAction } from "../lib/actions";
@@ -26,7 +25,7 @@ export function JobsPage() {
   const merge = useAction(mergeAction);
   const pick = useAction(pickAction);
   // TODO: handle error state
-  const { loading, error } = useFetchListPositions(
+  useFetchListPositions(
     {
       onNewData: (curr, data) => {
         merge({ path: "jobPostings", data, prop: "id" });
@@ -34,7 +33,7 @@ export function JobsPage() {
           pick({ path: "jobPostingsResult", data, prop: "id" });
           setFilter(true);
 
-          if (data.length == 0) setNoResults(true);
+          if (data.length === 0) setNoResults(true);
           else if (noResults) setNoResults(false);
         } else {
           setFilter(false);

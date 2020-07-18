@@ -13,7 +13,7 @@ export function JobDetailPage() {
   const { id } = useParams();
   const set = useAction(setAction);
   // TODO: handle error state
-  const { loading, error } = useFetchJobPosting(
+  const { loading } = useFetchJobPosting(
     {
       onNewData: (curr, data) => {
         set({ path: `jobPostingsDetail.${id}`, data });

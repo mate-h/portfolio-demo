@@ -10,7 +10,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import debounce from "lodash.debounce";
 import { debounceTime } from "../lib/config";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-import { useHistory } from "react-router-dom";
 import { BootstrapInput } from ".";
 
 const storeValue = debounce(
@@ -23,7 +22,6 @@ const storeValue = debounce(
 
 export function SearchBar() {
   const searchForm = useSearchForm();
-  const history = useHistory();
   const [form, setForm] = useState<any>(searchForm);
   const [autoSearch, setAutoSearch] = useState(true);
   const emptyForm = (f: any) => Object.values(f).filter((a) => a).length === 0;

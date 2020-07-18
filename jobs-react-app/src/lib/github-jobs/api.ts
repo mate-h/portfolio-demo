@@ -1,7 +1,6 @@
 import { API, ListPositionsResponse, JobPosting } from "GitHubJobs";
 import useFetch, { UseFetch, IncomingOptions } from "use-http";
 import { listPositionsRequestUrl, getPositionsRequestUrl } from "../config";
-import { useEffect } from "react";
 
 type StatefulHook<T extends (...args: any) => any> = (
   options?: IncomingOptions,
