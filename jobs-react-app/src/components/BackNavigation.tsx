@@ -22,9 +22,11 @@ export const BackNavigation: React.FC<BackNavigationProps> = (
   if (location.state && (location.state as any).from) {
     // Newer browsers preserve scroll position on back navigation
     BackLink = ({ children }) => (
-      <Link color="primary" onClick={history.goBack} href="#">
-        {children}
-      </Link>
+      <div style={{ cursor: "pointer" }}>
+        <Link color="primary" onClick={history.goBack}>
+          {children}
+        </Link>
+      </div>
     );
   }
 
