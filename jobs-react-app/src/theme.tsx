@@ -48,6 +48,23 @@ const theme = createMuiTheme({
         lineHeight: 1.6,
       },
     },
+    MuiButton: {
+      root: {
+        textTransform: "none",
+        fontSize: "calc(14 / 16 * 1rem)",
+        fontWeight: 500,
+        letterSpacing: "calc(0.1 / 14 * 1em)",
+        lineHeight: 1.71428571429,
+      },
+    },
+  },
+  props: {
+    MuiButtonBase: {
+      disableRipple: true,
+    },
+    MuiButton: {
+      disableElevation: true,
+    },
   },
 });
 
