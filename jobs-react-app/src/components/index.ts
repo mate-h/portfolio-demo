@@ -9,6 +9,7 @@ import { CompanyLogoSkeleton } from "./CompanyLogoSkeleton";
 import { JobDetailSkeleton } from "./JobDetailSkeleton";
 import { BootstrapInput } from "./BootstrapInput";
 import { SearchBar } from "./SearchBar";
+import { ProTip } from "./ProTip";
 
 export {
   Layout,
@@ -22,4 +23,5 @@ export {
   JobDetailSkeleton,
   BootstrapInput,
   SearchBar,
+  ProTip,
 };

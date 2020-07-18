@@ -1,8 +1,7 @@
-import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import Link from '@material-ui/core/Link';
-import SvgIcon, { SvgIconProps } from '@material-ui/core/SvgIcon';
-import Typography from '@material-ui/core/Typography';
+import React from "react";
+import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import SvgIcon, { SvgIconProps } from "@material-ui/core/SvgIcon";
+import Typography from "@material-ui/core/Typography";
 
 function LightBulbIcon(props: SvgIconProps) {
   return (
@@ -18,20 +17,19 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(6, 0, 3),
     },
     lightBulb: {
-      verticalAlign: 'middle',
+      verticalAlign: "middle",
       marginRight: theme.spacing(1),
     },
-  }),
+  })
 );
 
-export default function ProTip() {
+export function ProTip() {
   const classes = useStyles();
   return (
     <Typography className={classes.root} color="textSecondary">
       <LightBulbIcon className={classes.lightBulb} />
-      Pro tip: See more{' '}
-      <Link href="https://material-ui.com/getting-started/templates/">templates</Link> on the
-      Material-UI documentation.
+      GitHub Jobs is a great place attract the best technical talent for your
+      company's open software development positions.
     </Typography>
   );
 }

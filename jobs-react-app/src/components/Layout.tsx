@@ -1,11 +1,10 @@
 import React from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import ProTip from "./ProTip";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-import { SearchBar } from ".";
+import { SearchBar, ProTip } from ".";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -18,14 +17,16 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
+    <Box py={2}>
+      <Typography variant="body2" color="textSecondary" align="center">
+        {"© "}
+        {new Date().getFullYear() + " "}
+        <Link color="inherit" href="https://jobs.github.com/">
+          GitHub Inc.
+        </Link>
+        {" All rights reserved."}
+      </Typography>
+    </Box>
   );
 }
 
@@ -35,7 +36,7 @@ export const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
     <Container maxWidth="md">
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
-          Create React App v4-beta example with TypeScript
+          GitHub Jobs
         </Typography>
         <ProTip />
         <SearchBar />
