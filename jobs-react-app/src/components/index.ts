@@ -7,6 +7,7 @@ import { JobPostingSkeleton } from "./JobPostingSkeleton";
 import { CompanyLogo } from "./CompanyLogo";
 import { CompanyLogoSkeleton } from "./CompanyLogoSkeleton";
 import { JobDetailSkeleton } from "./JobDetailSkeleton";
+import { BootstrapInput } from "./BootstrapInput";
 import { SearchBar } from "./SearchBar";
 
 export {
@@ -19,5 +20,6 @@ export {
   CompanyLogo,
   CompanyLogoSkeleton,
   JobDetailSkeleton,
+  BootstrapInput,
   SearchBar,
 };

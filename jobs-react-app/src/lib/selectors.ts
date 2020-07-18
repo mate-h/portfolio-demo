@@ -8,6 +8,7 @@ export type JobPostingSelectorParams = {
 export type SortJobPostings = (a: JobPosting, b: JobPosting) => number;
 export type JobPostingsSelectorParams = Partial<{
   sort: SortJobPostings;
+  filter: boolean;
 }>;
 
 const defaultSort: SortJobPostings = (a, b) => {
@@ -20,9 +21,12 @@ export function useJobPostings(params?: JobPostingsSelectorParams) {
   // set defaults
   const mergedParams: JobPostingsSelectorParams = {
     sort: defaultSort,
+    filter: false, // return all job postings by default
     ...params,
   };
   const { state } = useStore();
+  if (mergedParams.filter)
+    return state.jobPostingsResult.map((id) => state.jobPostings[id]);
   return Object.values(state.jobPostings).sort(mergedParams.sort);
 }
 

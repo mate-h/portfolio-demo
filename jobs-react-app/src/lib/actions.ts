@@ -29,3 +29,12 @@ export const merge = (params: {
   type: `${r}/merge`,
   payload: params,
 });
+
+export const pick = (params: {
+  path: string | string[];
+  data: any[];
+  prop: string;
+}): Action<any> => ({
+  type: `${r}/pick`,
+  payload: params,
+});

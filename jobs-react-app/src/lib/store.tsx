@@ -1,5 +1,5 @@
 import React, { useReducer, Dispatch, useContext } from "react";
-import { getType, set, merge } from "./actions";
+import { getType, set, merge, pick } from "./actions";
 import * as icepick from "icepick";
 import { JobPosting } from "GitHubJobs";
 
@@ -13,6 +13,7 @@ type JobPostingsDetailState = { [id: string]: JobPosting };
 
 export interface StoreState {
   jobPostings: JobPostingsState;
+  jobPostingsResult: string[];
   jobPostingsDetail: JobPostingsDetailState;
   searchForm: {
     descriptionField: string;
@@ -22,6 +23,7 @@ export interface StoreState {
 
 const initialState: StoreState = icepick.freeze({
   jobPostings: {},
+  jobPostingsResult: [],
   jobPostingsDetail: {},
   searchForm: {
     descriptionField: "",
@@ -48,14 +50,14 @@ const makepath = (path: string | string[]) =>
 
 function reducer(state: StoreState, action: Action<any>): StoreState {
   const { type, payload } = action;
-  let path;
+  let path, prop: any;
   switch (type) {
     case getType(set):
       path = makepath(payload.path);
       return icepick.assocIn(state, path, payload.data);
     case getType(merge):
       path = makepath(payload.path);
-      const prop = payload.prop;
+      prop = payload.prop;
       const newData = payload.data.reduce((acc: any, curr: any) => {
         return { [curr[prop]]: curr, ...acc };
       }, {});
@@ -64,6 +66,13 @@ function reducer(state: StoreState, action: Action<any>): StoreState {
         path,
         icepick.merge(newData, icepick.getIn(state, path))
       );
+    case getType(pick):
+      path = makepath(payload.path);
+      prop = payload.prop;
+      const arr = payload.data.reduce((acc: any, curr: any) => {
+        return [...acc, curr[prop]];
+      }, []);
+      return icepick.assocIn(state, path, arr);
   }
   return state;
 }

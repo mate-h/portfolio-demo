@@ -6,4 +6,4 @@ export const getPositionsRequestUrl = (id: string) =>
 export const listPositionsPageCount = 50;
 
 // Other config
-export const debounceTime = 150; //ms
+export const debounceTime = 500; //ms

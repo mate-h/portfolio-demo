@@ -1,42 +1,17 @@
 import React, { useState } from "react";
-import { fade, withStyles } from "@material-ui/core/styles";
-import InputBase from "@material-ui/core/InputBase";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { set as setAction } from "../lib/actions";
-import { useAction } from "../lib/hooks";
+import { useAction, useSearchForm } from "../lib/hooks";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
 import debounce from "lodash.debounce";
 import { debounceTime } from "../lib/config";
-
-const BootstrapInput = withStyles((theme) => ({
-  root: {
-    "label + &": {
-      marginTop: theme.spacing(3),
-    },
-  },
-  input: {
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "20px 20px",
-    backgroundPosition: "10px center",
-    borderRadius: theme.shape.borderRadius,
-    position: "relative",
-    backgroundColor: theme.palette.common.white,
-    border: "1px solid #ced4da",
-    height: 16,
-    padding: "10px 12px 10px 36px",
-    transition: theme.transitions.create(["border-color", "box-shadow"]),
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    "&:focus": {
-      boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
-      borderColor: theme.palette.primary.main,
-    },
-  },
-}))(InputBase);
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { useHistory } from "react-router-dom";
+import { BootstrapInput } from ".";
 
 const storeValue = debounce(
   (path: string, data: string, set) => {
@@ -47,20 +22,29 @@ const storeValue = debounce(
 );
 
 export function SearchBar() {
-  const [form, setForm] = useState<any>({});
+  const searchForm = useSearchForm();
+  const history = useHistory();
+  const [form, setForm] = useState<any>(searchForm);
+  const [autoSearch, setAutoSearch] = useState(true);
+  const emptyForm = (f: any) => Object.values(f).filter((a) => a).length === 0;
   const set = useAction(setAction);
-  const getInputHandler = (id: string) => (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handler = (event: React.ChangeEvent<any>) => {
     const data = event.target.value;
-    setForm({
+    const name = event.target.name;
+    const newForm = {
       ...form,
-      [id]: data,
-    });
-    storeValue(`searchForm.${id}`, data, set);
+      [name]: data,
+    };
+    setForm(newForm);
+    if (autoSearch) {
+      storeValue(`searchForm.${name}`, data, set);
+    } else if (emptyForm(newForm)) {
+      set({ path: `searchForm`, data: form });
+    }
   };
-  const onFormSubmit = () => {
-    console.log(form);
+  const onFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    set({ path: `searchForm`, data: form });
   };
 
   return (
@@ -73,12 +57,13 @@ export function SearchBar() {
             </InputLabel>
             <BootstrapInput
               id="description-input"
+              name="descriptionField"
               inputProps={{
                 style: { backgroundImage: `url(/clipboard.min.svg)` },
               }}
               title="Filter by title, benefits, companies, expertise"
               placeholder="Filter by title, benefits, companies, expertise"
-              onChange={getInputHandler("descriptionField")}
+              onChange={handler}
               autoComplete="off"
             />
           </FormControl>
@@ -90,20 +75,37 @@ export function SearchBar() {
             </InputLabel>
             <BootstrapInput
               id="location-input"
+              name="locationField"
               inputProps={{ style: { backgroundImage: `url(/earth.min.svg)` } }}
               title="Filter by city, state, zip code or country"
               placeholder="Filter by city, state, zip code or country"
-              onChange={getInputHandler("locationField")}
+              onChange={handler}
               autoComplete="off"
             />
           </FormControl>
         </Grid>
         <Grid item>
-          <Button variant="contained" color="primary">
+          <Button
+            disabled={emptyForm(form)}
+            type="submit"
+            variant="contained"
+            color="primary"
+          >
             Search
           </Button>
         </Grid>
       </Grid>
+      <FormControlLabel
+        control={
+          <Checkbox
+            name="autoSearch"
+            checked={autoSearch}
+            onChange={() => setAutoSearch(!autoSearch)}
+            color="primary"
+          />
+        }
+        label="Search as you type"
+      />
     </Box>
   );
 }

@@ -2,29 +2,20 @@
  * Based on documentation from https://jobs.github.com/api
  */
 declare module "GitHubJobs" {
-  type ListPositionsBaseParams = Partial<{
+  export type ListPositionsParams = Partial<{
     /** A search term, such as "ruby" or "java". This parameter is aliased to search. */
     description: string;
     /** A search term, such as "ruby" or "java". This parameter is aliased to description. */
     search: string;
     /** If you want to limit results to full time positions set this parameter to 'true'. */
     full_time: boolean;
-  }>;
-
-  type StringLocationParams = {
     /** A city name, zip code, or other location search term. */
     location: string;
-  };
-
-  type LatLongLocationParams = {
     /** A specific latitude. If used, you must also send long and must not send location. */
     lat: string;
     /** A specific longitude. If used, you must also send lat and must not send location. */
     long: string;
-  };
-
-  export type ListPositionsParams = ListPositionsBaseParams &
-    ((LatLongLocationParams | StringLocationParams) | {});
+  }>;
 
   export type GetJobPostingParams = {
     id: string;

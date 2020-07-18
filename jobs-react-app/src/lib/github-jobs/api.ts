@@ -1,6 +1,7 @@
 import { API, ListPositionsResponse, JobPosting } from "GitHubJobs";
 import useFetch, { UseFetch, IncomingOptions } from "use-http";
 import { listPositionsRequestUrl, getPositionsRequestUrl } from "../config";
+import { useEffect } from "react";
 
 type StatefulHook<T extends (...args: any) => any> = (
   options?: IncomingOptions,
@@ -8,7 +9,7 @@ type StatefulHook<T extends (...args: any) => any> = (
 ) => UseFetch<ReturnType<T>>;
 
 // expiration is 24 hours by default
-const fetchOptions: IncomingOptions = {
+const defaultOptions: IncomingOptions = {
   persist: true,
 };
 
@@ -20,8 +21,8 @@ export const useFetchListPositions: StatefulHook<API["listPositions"]> = (
   url.search = new URLSearchParams(params as any).toString();
   return useFetch<ListPositionsResponse>(
     url.toString(),
-    { ...fetchOptions, ...options },
-    []
+    { ...defaultOptions, ...options },
+    [...Object.values(params || {})]
   );
 };
 
@@ -36,7 +37,7 @@ export const useFetchJobPosting: StatefulHook<API["getJobPosting"]> = (
   url.search = new URLSearchParams(params as any).toString();
   return useFetch<JobPosting>(
     url.toString(),
-    { ...fetchOptions, ...options },
-    []
+    { ...defaultOptions, ...options },
+    [...Object.values(params || {})]
   );
 };
