@@ -1,7 +1,7 @@
 import React from "react";
 import Interweave from "interweave";
 import { useParams } from "react-router-dom";
-import { BackNavigation, CompanyLogo } from ".";
+import { BackNavigation, CompanyLogo, JobDetailSkeleton } from ".";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { useJobPosting, useFetchJobPosting, useAction } from "../lib/hooks";
@@ -23,7 +23,7 @@ export function JobDetailPage() {
   );
   const jobPosting = useJobPosting({ id });
 
-  if (!jobPosting) return <></>;
+  if (loading && !jobPosting) return <JobDetailSkeleton />;
 
   // extract apply link from "how to apply" section
   const el = document.createElement("html");

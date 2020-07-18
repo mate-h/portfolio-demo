@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
 import { useJobPosting } from "../lib/hooks";
-import Skeleton from "@material-ui/lab/Skeleton";
 import Link from "@material-ui/core/Link";
+import { CompanyLogoSkeleton } from ".";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -11,10 +11,21 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: "auto",
       marginRight: "auto",
     },
+    skeleton: {
+      transition: `opacity 75ms linear`,
+      position: "absolute",
+      left: 0,
+      right: 0,
+      top: 0,
+    },
     img: {
+      display: "block",
+      marginLeft: "auto",
+      marginRight: "auto",
       maxWidth: 344,
       objectFit: "contain",
       borderRadius: theme.shape.borderRadius,
+      transition: `opacity 75ms linear`,
     },
   })
 );
@@ -31,17 +42,19 @@ export const CompanyLogo = (params: CompanyLogoParams) => {
     setImageLoaded(true);
   };
   return (
-    <div style={{ height: 140, overflow: "hidden" }}>
-      <Skeleton
-        className={classes.center}
-        style={{ display: imageLoaded ? "none" : "visible" }}
-        height={140}
-        width={344}
-      />
+    <div style={{ height: 140, overflow: "hidden", position: "relative" }}>
+      <div
+        className={classes.skeleton}
+        style={{ opacity: imageLoaded ? 0 : 1 }}
+      >
+        <CompanyLogoSkeleton className={classes.center} />
+      </div>
+
       <Link href={jobPosting.company_url} rel="noopener" target="_blank">
         <img
           height="140"
-          className={[classes.img, classes.center].join(" ")}
+          style={{ opacity: imageLoaded ? 1 : 0 }}
+          className={classes.img}
           src={jobPosting.company_logo}
           alt={jobPosting.company}
           onLoad={onImageLoaded}
