@@ -1,9 +1,9 @@
 {
-  "short_name": "Your Orders",
-  "name": "Your Orders",
+  "short_name": "GitHub Jobs",
+  "name": "GitHub Jobs",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://jobs.github.com/images/layout/invertocat.png",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     }
