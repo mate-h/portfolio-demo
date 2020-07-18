@@ -30,7 +30,7 @@ export const BackNavigation: React.FC<BackNavigationProps> = (
 
   return (
     <BackLink>
-      <BackIcon style={{ fill: "currentColor", height: 12 }} />
+      <BackIcon style={{ height: 12 }} />
       <Typography
         color="inherit"
         style={{ verticalAlign: 1, marginLeft: 4 }}

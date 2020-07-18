@@ -4,9 +4,10 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "latest",
-    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@material-ui/lab": "latest",
     "icepick": "latest",
     "interweave": "latest",
+    "lodash.debounce": "latest",
     "react": "latest",
     "react-dom": "latest",
     "react-router-dom": "latest",
@@ -36,6 +37,7 @@
     "@types/react": "latest",
     "@types/react-dom": "latest",
     "@types/react-router-dom": "latest",
-    "@types/icepick": "latest"
+    "@types/icepick": "latest",
+    "@types/lodash.debounce": "latest"
   }
 }

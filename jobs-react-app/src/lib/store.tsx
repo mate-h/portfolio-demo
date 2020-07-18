@@ -14,11 +14,19 @@ type JobPostingsDetailState = { [id: string]: JobPosting };
 export interface StoreState {
   jobPostings: JobPostingsState;
   jobPostingsDetail: JobPostingsDetailState;
+  searchForm: {
+    descriptionField: string;
+    locationField: string;
+  };
 }
 
 const initialState: StoreState = icepick.freeze({
   jobPostings: {},
   jobPostingsDetail: {},
+  searchForm: {
+    descriptionField: "",
+    locationField: "",
+  },
 });
 
 export interface Store {
@@ -65,7 +73,7 @@ export function StoreProvider(props: any) {
   const value = { state, dispatch };
 
   // Uncomment this line to inspect store state
-  console.log("store state", state);
+  // console.log("store state", state);
 
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }

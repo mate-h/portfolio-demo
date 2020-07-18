@@ -5,6 +5,7 @@ import ProTip from "./ProTip";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import { SearchBar } from ".";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -37,6 +38,7 @@ export const Layout: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
           Create React App v4-beta example with TypeScript
         </Typography>
         <ProTip />
+        <SearchBar />
         <div className={classes.root}>{children}</div>
         <Copyright />
       </Box>

@@ -14,6 +14,8 @@ const defaultSort: SortJobPostings = (a, b) => {
   return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
 };
 
+// TODO: useMemo hook for performance optimization
+
 export function useJobPostings(params?: JobPostingsSelectorParams) {
   // set defaults
   const mergedParams: JobPostingsSelectorParams = {
@@ -32,4 +34,9 @@ export function useJobPosting(params: JobPostingSelectorParams): JobPosting {
     return state.jobPostingsDetail[params.id];
   // return partial data
   return state.jobPostings[params.id];
+}
+
+export function useSearchForm() {
+  const { state } = useStore();
+  return state.searchForm;
 }

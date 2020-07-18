@@ -14,10 +14,10 @@ My developer environment is set up using the fish shell, my IDE of choice is VS 
 ```bash
 curl https://codeload.github.com/mui-org/material-ui/tar.gz/master | tar -xz --strip=2 material-ui-master/examples/create-react-app-with-typescript
 mv create-react-app-with-typescript jobs-react-app && cd jobs-react-app
-npm install icepick use-http interweave react-router-dom
+npm install icepick use-http interweave lodash.debounce react-router-dom
 ```
 
-I use four basic dependencies: `react-router-dom` for clientside routing, `icepick` for treating frozen JavaScript objects as persistent immutable collections to implement a store, `use-http` for making isomorphic http requests with React hooks, and lastly, `interweave` to safely render HTML (the description field in the job posting object), filter attributes, autowrap text with matchers, render emoji characters, and so on.
+I use four basic dependencies: `react-router-dom` for clientside routing, `icepick` for treating frozen JavaScript objects as persistent immutable collections to implement a store, `use-http` for making isomorphic http requests with React hooks, `lodash.debounce` to debounce input events in the search form, and lastly, `interweave` to safely render HTML (the description field in the job posting object), filter attributes, autowrap text with matchers, render emoji characters, and so on.
 
 > 📘 Note
 >
