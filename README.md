@@ -17,7 +17,7 @@ mv create-react-app-with-typescript jobs-react-app && cd jobs-react-app
 npm install icepick use-http react-router-dom
 ```
 
-> 📘Note
+> 📘 Note
 >
 > _To those using Deno with the VSCode Extension: you should disable it for the Node typescript environment to work._
 
