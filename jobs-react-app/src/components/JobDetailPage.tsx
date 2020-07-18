@@ -8,7 +8,6 @@ import { useJobPosting, useFetchJobPosting, useAction } from "../lib/hooks";
 import { set as setAction } from "../lib/actions";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import { attributeRegex } from "../lib/config";
 
 export function JobDetailPage() {
   const { id } = useParams();
@@ -27,15 +26,12 @@ export function JobDetailPage() {
   if (!jobPosting) return <></>;
 
   // extract apply link from "how to apply" section
-  const match = jobPosting.how_to_apply.match(attributeRegex);
+  const el = document.createElement("html");
+  el.innerHTML = jobPosting.how_to_apply;
+  const anchors = el.getElementsByTagName("a");
   let applyLink;
-  if (match) {
-    applyLink = match.reduce((acc, curr, i, arr) => {
-      if (curr == "href") {
-        return arr[i + 1];
-      }
-      return acc;
-    });
+  if (anchors.length) {
+    applyLink = anchors.item(0)?.href;
   }
 
   return (

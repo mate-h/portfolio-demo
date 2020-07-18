@@ -6,4 +6,3 @@ export const getPositionsRequestUrl = (id: string) =>
 export const listPositionsPageCount = 50;
 
 // Other config
-export const attributeRegex = /(\S+)=["']?((?:.(?!["']?\s+(?:\S+)=|[>"']))+.)["']?/;
