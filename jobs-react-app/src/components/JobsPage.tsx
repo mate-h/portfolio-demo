@@ -1,11 +1,11 @@
 import React from "react";
-import { useFetchListPositions, useAction, useStore } from "../lib/hooks";
+import { useFetchListPositions, useAction, useJobPostings } from "../lib/hooks";
 import { JobPosting } from "./JobPosting";
 import { merge as mergeAction } from "../lib/actions";
 import List from "@material-ui/core/List";
 
 export function JobsPage() {
-  const { state } = useStore();
+  const jobPostings = useJobPostings();
   const merge = useAction(mergeAction);
   const { loading, error } = useFetchListPositions({
     onNewData: (curr, data) => {
@@ -16,7 +16,7 @@ export function JobsPage() {
   return (
     <>
       <List>
-        {Object.values(state.jobPostings).map((jobPosting) => (
+        {jobPostings.map((jobPosting) => (
           <JobPosting key={jobPosting.id} id={jobPosting.id} />
         ))}
       </List>

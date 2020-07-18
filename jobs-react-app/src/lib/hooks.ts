@@ -1,7 +1,7 @@
 import { useFetchListPositions, useFetchJobPosting } from "./github-jobs-api";
 import { useAction } from "./actions";
 import { useStore } from "./store";
-import { useJobPosting } from "./selectors";
+import { useJobPosting, useJobPostings } from "./selectors";
 
 export {
   useFetchListPositions,
@@ -9,4 +9,5 @@ export {
   useAction,
   useStore,
   useJobPosting,
+  useJobPostings,
 };
