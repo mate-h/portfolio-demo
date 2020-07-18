@@ -1,7 +1,6 @@
-import { useParams } from "react-router-dom";
-
 import React from "react";
 import Interweave from "interweave";
+import { useParams } from "react-router-dom";
 import { BackNavigation } from "./BackNavigation";
 import { Typography } from "@material-ui/core";
 import { useJobPosting, useFetchJobPosting, useAction } from "../lib/hooks";
@@ -24,7 +23,7 @@ export function JobDetailPage() {
   return (
     <div style={{ padding: 16 }}>
       <div>
-        <BackNavigation />
+        <BackNavigation fallback="/" />
       </div>
       <Typography color="textSecondary" variant="overline">
         {jobPosting.type}
