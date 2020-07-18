@@ -2,6 +2,8 @@
 
 This repository hosts a demo for the Collock team for an assigment in the job interviewing process.
 
+[Demo in Production](https://github-jobs-lac.vercel.app)
+
 ## Intro
 
 To better demonstrate my ability of strategic problemsolving and documentation, I decided to also document the process of how I complete both assignments. To get started, I open up my terminal and create a new git repository called `portfolio-demo`, so I can version my changes. Within this main folder is where I can create sub-folders for each module. For folders and files I will be using a snake-case naming convention. For this demo, I will be creating two modules, one for the first assignment called `design-documentation` and one for the second assignment: `jobs-react-app`.
