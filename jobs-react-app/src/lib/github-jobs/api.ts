@@ -17,9 +17,9 @@ export const useFetchListPositions: StatefulHook<API["listPositions"]> = (
   params
 ) => {
   const url = new URL(listPositionsRequestUrl);
-  url.search = new URLSearchParams(params as any).toString();
+  const search = new URLSearchParams(params as any).toString();
   return useFetch<ListPositionsResponse>(
-    url.toString(),
+    url.toString() + `?${search}`,
     { ...defaultOptions, ...options },
     [...Object.values(params || {})]
   );
@@ -33,9 +33,9 @@ export const useFetchJobPosting: StatefulHook<API["getJobPosting"]> = (
   const id = params.id;
   const url = new URL(getPositionsRequestUrl(id));
   delete params["id"];
-  url.search = new URLSearchParams(params as any).toString();
+  const search = new URLSearchParams(params as any).toString();
   return useFetch<JobPosting>(
-    url.toString(),
+    url.toString() + `?${search}`,
     { ...defaultOptions, ...options },
     [...Object.values(params || {})]
   );
