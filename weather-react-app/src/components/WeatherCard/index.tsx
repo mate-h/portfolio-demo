@@ -4,7 +4,7 @@ import { icon } from "../../lib/config";
 
 export function WeatherCard() {
   return (
-    <div className="app-background-cover relative bg-black bg-opacity-54 text-white p-4 md:p-6 rounded-lg">
+    <div className="app-background-cover relative bg-black bg-opacity-72 text-white p-4 md:p-6 rounded-lg">
       <div className="hairline-border-outside" />
       <Paragraph className="caption text-opacity-72 text-white">
         Monday 5:00 PM

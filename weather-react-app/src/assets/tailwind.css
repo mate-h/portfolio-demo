@@ -70,94 +70,96 @@
 
 /* Material Design Typography Components */
 /* Leading must be a value divisible by 4 to maintain the grid. */
-.headline1 {
-  @apply text-7xl;
-  @apply font-light;
-  --leading: 112;
-  letter-spacing: calc(-1.5 / var(--text-7xl) * 1em);
-  font-variation-settings: "wght" 250;
-}
-.headline2 {
-  @apply text-6xl;
-  @apply font-light;
-  --leading: 72;
-  letter-spacing: calc(-0.5 / var(--text-6xl) * 1em);
-  font-variation-settings: "wght" 300;
-}
-.headline3 {
-  @apply text-5xl;
-  @apply font-normal;
-  --leading: 56;
-  font-variation-settings: "wght" 350;
-}
-.headline4 {
-  @apply text-4xl;
-  @apply font-normal;
-  --leading: 40;
-  letter-spacing: calc(0.25 / var(--text-4xl) * 1em);
-  font-variation-settings: "wght" 400;
-}
-.headline5 {
-  @apply text-2xl;
-  @apply font-normal;
-  --leading: 28;
-  font-variation-settings: "wght" 450;
-}
-.headline6 {
-  @apply text-xl;
-  @apply font-medium;
-  --leading: 24;
-  letter-spacing: calc(0.15 / var(--text-xl) * 1em);
-  font-variation-settings: "wght" 550;
-}
-.subtitle1 {
-  @apply text-base;
-  @apply font-normal;
-  --leading: 24;
-  letter-spacing: calc(0.15 / var(--text-base) * 1em);
-}
-.subtitle2 {
-  @apply text-sm;
-  @apply font-medium;
-  --leading: 24;
-  letter-spacing: calc(0.1 / var(--text-sm) * 1em);
-  font-variation-settings: "wght" 550;
-}
-.body1 {
-  @apply text-base;
-  @apply font-normal;
-  --leading: 28;
-  letter-spacing: calc(0.44 / var(--text-base) * 1em);
-}
-.body2 {
-  @apply text-sm;
-  @apply font-normal;
-  --leading: 20;
-  letter-spacing: calc(0.25 / var(--text-sm) * 1em);
-}
-.button {
-  @apply text-sm;
-  @apply font-medium;
-  @apply uppercase;
-  --leading: 16;
-  letter-spacing: calc(1.35 / var(--text-sm) * 1em);
-  font-feature-settings: "cpsp";
-  font-variation-settings: "wght" 550;
-}
-.caption {
-  @apply text-xs;
-  @apply font-normal;
-  --leading: 16;
-  letter-spacing: calc(0.4 / var(--text-xs) * 1em);
-}
-.overline {
-  @apply text-2xs;
-  @apply font-medium;
-  @apply uppercase;
-  --leading: 16;
-  letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
-  font-feature-settings: "cpsp";
-  font-variation-settings: "wght" 550;
+@responsive {
+  .headline1 {
+    @apply text-7xl;
+    @apply font-light;
+    --leading: 112;
+    letter-spacing: calc(-1.5 / var(--text-7xl) * 1em);
+    font-variation-settings: "wght" 250;
+  }
+  .headline2 {
+    @apply text-6xl;
+    @apply font-light;
+    --leading: 72;
+    letter-spacing: calc(-0.5 / var(--text-6xl) * 1em);
+    font-variation-settings: "wght" 300;
+  }
+  .headline3 {
+    @apply text-5xl;
+    @apply font-normal;
+    --leading: 56;
+    font-variation-settings: "wght" 350;
+  }
+  .headline4 {
+    @apply text-4xl;
+    @apply font-normal;
+    --leading: 40;
+    letter-spacing: calc(0.25 / var(--text-4xl) * 1em);
+    font-variation-settings: "wght" 400;
+  }
+  .headline5 {
+    @apply text-2xl;
+    @apply font-normal;
+    --leading: 28;
+    font-variation-settings: "wght" 450;
+  }
+  .headline6 {
+    @apply text-xl;
+    @apply font-medium;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-xl) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+  .subtitle1 {
+    @apply text-base;
+    @apply font-normal;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-base) * 1em);
+  }
+  .subtitle2 {
+    @apply text-sm;
+    @apply font-medium;
+    --leading: 24;
+    letter-spacing: calc(0.1 / var(--text-sm) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+  .body1 {
+    @apply text-base;
+    @apply font-normal;
+    --leading: 28;
+    letter-spacing: calc(0.44 / var(--text-base) * 1em);
+  }
+  .body2 {
+    @apply text-sm;
+    @apply font-normal;
+    --leading: 20;
+    letter-spacing: calc(0.25 / var(--text-sm) * 1em);
+  }
+  .button {
+    @apply text-sm;
+    @apply font-medium;
+    @apply uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.35 / var(--text-sm) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
+  }
+  .caption {
+    @apply text-xs;
+    @apply font-normal;
+    --leading: 16;
+    letter-spacing: calc(0.4 / var(--text-xs) * 1em);
+  }
+  .overline {
+    @apply text-2xs;
+    @apply font-medium;
+    @apply uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
+  }
 }
 
 p.paragraph {
@@ -224,9 +226,14 @@ p.paragraph::after {
       left top / 100% 4px repeat-y;
 }
 
-i {
+i,
+.sf-icon {
   font-family: "SF Symbols";
   font-style: normal;
+}
+
+i[tabindex] {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Baseline grid */
@@ -244,15 +251,39 @@ i {
   left: 0px;
   top: 0px;
   z-index: -1;
-  background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 1px,
-        transparent 1px
-      )
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 1px, transparent 1px)
       left top / 8px 100% repeat-x,
-    linear-gradient(
-        rgba(255, 255, 255, 0.24) var(--pixel),
-        transparent var(--pixel)
-      )
+    linear-gradient(rgba(0, 0, 0, 0.24) var(--pixel), transparent var(--pixel))
       left top / 100% 4px repeat-y;
+}
+
+/* Enable tooltips for mobile devices */
+[title]:focus {
+  outline: none;
+  border: none;
+}
+@media (pointer: coarse), (hover: none) {
+  [title] {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+  }
+  [title]:focus::after {
+    content: attr(title);
+    position: absolute;
+    left: 100%;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #212121;
+    width: 160px;
+    padding: 4px;
+    z-index: 1;
+    border-radius: 0.25rem;
+
+    font-family: var(--font-family);
+    @apply text-xs;
+    @apply font-normal;
+    --leading: 16;
+    letter-spacing: calc(0.4 / var(--text-xs) * 1em);
+    text-transform: none;
+  }
 }

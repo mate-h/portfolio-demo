@@ -48,6 +48,8 @@ const lookup = {
   "cloud.fill": [56256, 56771],
   "cloud.fog": [56256, 56778],
   "cloud.fog.fill": [56256, 56779],
+  "info.circle": [56256, 56692],
+  "info.circle.fill": [56256, 56693],
 };
 
 export const icon = (name: keyof typeof lookup) => {

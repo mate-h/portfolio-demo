@@ -18,7 +18,7 @@
     "use-http": "^1.0.13"
   },
   "scripts": {
-    "start": "npm run watch:css && react-scripts start",
+    "start": "react-scripts start",
     "build": "npm run build:css && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",

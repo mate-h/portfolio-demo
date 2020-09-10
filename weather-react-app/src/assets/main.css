@@ -19082,9 +19082,14 @@ p.paragraph::after {
       left top / 100% 4px repeat-y;
 }
 
-i {
+i,
+.sf-icon {
   font-family: "SF Symbols";
   font-style: normal;
+}
+
+i[tabindex] {
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Baseline grid */
@@ -19103,17 +19108,43 @@ i {
   left: 0px;
   top: 0px;
   z-index: -1;
-  background: linear-gradient(
-        to right,
-        rgba(255, 255, 255, 0) 1px,
-        transparent 1px
-      )
+  background: linear-gradient(to right, rgba(0, 0, 0, 0) 1px, transparent 1px)
       left top / 8px 100% repeat-x,
-    linear-gradient(
-        rgba(255, 255, 255, 0.24) var(--pixel),
-        transparent var(--pixel)
-      )
+    linear-gradient(rgba(0, 0, 0, 0.24) var(--pixel), transparent var(--pixel))
       left top / 100% 4px repeat-y;
+}
+
+/* Enable tooltips for mobile devices */
+
+[title]:focus {
+  outline: none;
+  border: none;
+}
+
+@media (pointer: coarse), (hover: none) {
+  [title] {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+  }
+
+  [title]:focus::after {
+    content: attr(title);
+    position: absolute;
+    left: 100%;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #212121;
+    width: 160px;
+    padding: 4px;
+    z-index: 1;
+    border-radius: 0.25rem;
+    font-family: var(--font-family);
+    font-size: 0.75rem;
+    font-weight: 400;
+    --leading: 16;
+    letter-spacing: calc(0.4 / var(--text-xs) * 1em);
+    text-transform: none;
+  }
 }
 
 @media (min-width: 640px) {
@@ -37349,6 +37380,108 @@ i {
 
   .sm\:animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  .sm\:headline1 {
+    font-size: 6rem;
+    font-weight: 300;
+    --leading: 112;
+    letter-spacing: calc(-1.5 / var(--text-7xl) * 1em);
+    font-variation-settings: "wght" 250;
+  }
+
+  .sm\:headline2 {
+    font-size: 3.75rem;
+    font-weight: 300;
+    --leading: 72;
+    letter-spacing: calc(-0.5 / var(--text-6xl) * 1em);
+    font-variation-settings: "wght" 300;
+  }
+
+  .sm\:headline3 {
+    font-size: 3rem;
+    font-weight: 400;
+    --leading: 56;
+    font-variation-settings: "wght" 350;
+  }
+
+  .sm\:headline4 {
+    font-size: 2.125rem;
+    font-weight: 400;
+    --leading: 40;
+    letter-spacing: calc(0.25 / var(--text-4xl) * 1em);
+    font-variation-settings: "wght" 400;
+  }
+
+  .sm\:headline5 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    --leading: 28;
+    font-variation-settings: "wght" 450;
+  }
+
+  .sm\:headline6 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-xl) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+
+  .sm\:subtitle1 {
+    font-size: 1rem;
+    font-weight: 400;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-base) * 1em);
+  }
+
+  .sm\:subtitle2 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    --leading: 24;
+    letter-spacing: calc(0.1 / var(--text-sm) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+
+  .sm\:body1 {
+    font-size: 1rem;
+    font-weight: 400;
+    --leading: 28;
+    letter-spacing: calc(0.44 / var(--text-base) * 1em);
+  }
+
+  .sm\:body2 {
+    font-size: 0.875rem;
+    font-weight: 400;
+    --leading: 20;
+    letter-spacing: calc(0.25 / var(--text-sm) * 1em);
+  }
+
+  .sm\:button {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.35 / var(--text-sm) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
+  }
+
+  .sm\:caption {
+    font-size: 0.75rem;
+    font-weight: 400;
+    --leading: 16;
+    letter-spacing: calc(0.4 / var(--text-xs) * 1em);
+  }
+
+  .sm\:overline {
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
   }
 }
 
@@ -55586,6 +55719,108 @@ i {
   .md\:animate-bounce {
     animation: bounce 1s infinite;
   }
+
+  .md\:headline1 {
+    font-size: 6rem;
+    font-weight: 300;
+    --leading: 112;
+    letter-spacing: calc(-1.5 / var(--text-7xl) * 1em);
+    font-variation-settings: "wght" 250;
+  }
+
+  .md\:headline2 {
+    font-size: 3.75rem;
+    font-weight: 300;
+    --leading: 72;
+    letter-spacing: calc(-0.5 / var(--text-6xl) * 1em);
+    font-variation-settings: "wght" 300;
+  }
+
+  .md\:headline3 {
+    font-size: 3rem;
+    font-weight: 400;
+    --leading: 56;
+    font-variation-settings: "wght" 350;
+  }
+
+  .md\:headline4 {
+    font-size: 2.125rem;
+    font-weight: 400;
+    --leading: 40;
+    letter-spacing: calc(0.25 / var(--text-4xl) * 1em);
+    font-variation-settings: "wght" 400;
+  }
+
+  .md\:headline5 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    --leading: 28;
+    font-variation-settings: "wght" 450;
+  }
+
+  .md\:headline6 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-xl) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+
+  .md\:subtitle1 {
+    font-size: 1rem;
+    font-weight: 400;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-base) * 1em);
+  }
+
+  .md\:subtitle2 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    --leading: 24;
+    letter-spacing: calc(0.1 / var(--text-sm) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+
+  .md\:body1 {
+    font-size: 1rem;
+    font-weight: 400;
+    --leading: 28;
+    letter-spacing: calc(0.44 / var(--text-base) * 1em);
+  }
+
+  .md\:body2 {
+    font-size: 0.875rem;
+    font-weight: 400;
+    --leading: 20;
+    letter-spacing: calc(0.25 / var(--text-sm) * 1em);
+  }
+
+  .md\:button {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.35 / var(--text-sm) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
+  }
+
+  .md\:caption {
+    font-size: 0.75rem;
+    font-weight: 400;
+    --leading: 16;
+    letter-spacing: calc(0.4 / var(--text-xs) * 1em);
+  }
+
+  .md\:overline {
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -73822,6 +74057,108 @@ i {
   .lg\:animate-bounce {
     animation: bounce 1s infinite;
   }
+
+  .lg\:headline1 {
+    font-size: 6rem;
+    font-weight: 300;
+    --leading: 112;
+    letter-spacing: calc(-1.5 / var(--text-7xl) * 1em);
+    font-variation-settings: "wght" 250;
+  }
+
+  .lg\:headline2 {
+    font-size: 3.75rem;
+    font-weight: 300;
+    --leading: 72;
+    letter-spacing: calc(-0.5 / var(--text-6xl) * 1em);
+    font-variation-settings: "wght" 300;
+  }
+
+  .lg\:headline3 {
+    font-size: 3rem;
+    font-weight: 400;
+    --leading: 56;
+    font-variation-settings: "wght" 350;
+  }
+
+  .lg\:headline4 {
+    font-size: 2.125rem;
+    font-weight: 400;
+    --leading: 40;
+    letter-spacing: calc(0.25 / var(--text-4xl) * 1em);
+    font-variation-settings: "wght" 400;
+  }
+
+  .lg\:headline5 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    --leading: 28;
+    font-variation-settings: "wght" 450;
+  }
+
+  .lg\:headline6 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-xl) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+
+  .lg\:subtitle1 {
+    font-size: 1rem;
+    font-weight: 400;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-base) * 1em);
+  }
+
+  .lg\:subtitle2 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    --leading: 24;
+    letter-spacing: calc(0.1 / var(--text-sm) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+
+  .lg\:body1 {
+    font-size: 1rem;
+    font-weight: 400;
+    --leading: 28;
+    letter-spacing: calc(0.44 / var(--text-base) * 1em);
+  }
+
+  .lg\:body2 {
+    font-size: 0.875rem;
+    font-weight: 400;
+    --leading: 20;
+    letter-spacing: calc(0.25 / var(--text-sm) * 1em);
+  }
+
+  .lg\:button {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.35 / var(--text-sm) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
+  }
+
+  .lg\:caption {
+    font-size: 0.75rem;
+    font-weight: 400;
+    --leading: 16;
+    letter-spacing: calc(0.4 / var(--text-xs) * 1em);
+  }
+
+  .lg\:overline {
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -92057,5 +92394,107 @@ i {
 
   .xl\:animate-bounce {
     animation: bounce 1s infinite;
+  }
+
+  .xl\:headline1 {
+    font-size: 6rem;
+    font-weight: 300;
+    --leading: 112;
+    letter-spacing: calc(-1.5 / var(--text-7xl) * 1em);
+    font-variation-settings: "wght" 250;
+  }
+
+  .xl\:headline2 {
+    font-size: 3.75rem;
+    font-weight: 300;
+    --leading: 72;
+    letter-spacing: calc(-0.5 / var(--text-6xl) * 1em);
+    font-variation-settings: "wght" 300;
+  }
+
+  .xl\:headline3 {
+    font-size: 3rem;
+    font-weight: 400;
+    --leading: 56;
+    font-variation-settings: "wght" 350;
+  }
+
+  .xl\:headline4 {
+    font-size: 2.125rem;
+    font-weight: 400;
+    --leading: 40;
+    letter-spacing: calc(0.25 / var(--text-4xl) * 1em);
+    font-variation-settings: "wght" 400;
+  }
+
+  .xl\:headline5 {
+    font-size: 1.5rem;
+    font-weight: 400;
+    --leading: 28;
+    font-variation-settings: "wght" 450;
+  }
+
+  .xl\:headline6 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-xl) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+
+  .xl\:subtitle1 {
+    font-size: 1rem;
+    font-weight: 400;
+    --leading: 24;
+    letter-spacing: calc(0.15 / var(--text-base) * 1em);
+  }
+
+  .xl\:subtitle2 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    --leading: 24;
+    letter-spacing: calc(0.1 / var(--text-sm) * 1em);
+    font-variation-settings: "wght" 550;
+  }
+
+  .xl\:body1 {
+    font-size: 1rem;
+    font-weight: 400;
+    --leading: 28;
+    letter-spacing: calc(0.44 / var(--text-base) * 1em);
+  }
+
+  .xl\:body2 {
+    font-size: 0.875rem;
+    font-weight: 400;
+    --leading: 20;
+    letter-spacing: calc(0.25 / var(--text-sm) * 1em);
+  }
+
+  .xl\:button {
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.35 / var(--text-sm) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
+  }
+
+  .xl\:caption {
+    font-size: 0.75rem;
+    font-weight: 400;
+    --leading: 16;
+    letter-spacing: calc(0.4 / var(--text-xs) * 1em);
+  }
+
+  .xl\:overline {
+    font-size: 0.625rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    --leading: 16;
+    letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
+    font-feature-settings: "cpsp";
+    font-variation-settings: "wght" 550;
   }
 }

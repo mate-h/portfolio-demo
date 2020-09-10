@@ -9,8 +9,8 @@ export type ParagraphProps = Partial<{
 
 export const Paragraph: React.FC<React.PropsWithChildren<ParagraphProps>> = ({
   children,
-  top = 0,
-  bottom = 0,
+  top,
+  bottom,
   leading,
   className,
 }) => {
@@ -19,7 +19,7 @@ export const Paragraph: React.FC<React.PropsWithChildren<ParagraphProps>> = ({
     const e = node.current;
     if (e) {
       if (top) e.style.setProperty("--top", `${top}`);
-      if (bottom) e.style.setProperty("--bottom", `${top}`);
+      if (bottom) e.style.setProperty("--bottom", `${bottom}`);
       if (leading) e.style.setProperty("--leading", `${leading}`);
     }
   });
