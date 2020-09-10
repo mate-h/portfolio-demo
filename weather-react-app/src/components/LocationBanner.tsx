@@ -1,39 +1,25 @@
 import React, { useState, useEffect } from "react";
 import { Paragraph } from "./Paragraph";
 import { usePersistedState } from "../lib/hooks";
+import { useContainer } from "unstated-next";
+import { CurrentPosition } from "../App";
 
 export function LocationBanner() {
-  const [permissionState, setPermissionState] = useState<PermissionState>();
   const [visible, setVisible] = usePersistedState(
     "locationBanner.visible",
     true
   );
-  useEffect(() => {
-    navigator.permissions
-      .query({
-        name: "geolocation",
-      })
-      .then(function (result) {
-        if (result.state == "granted") {
-          setPermissionState(result.state);
-        } else if (result.state == "prompt") {
-          setPermissionState(result.state);
-        } else if (result.state == "denied") {
-          setPermissionState(result.state);
-        }
-        result.onchange = function () {
-          setPermissionState(result.state);
-        };
-      });
-  });
-  const revealPosition: PositionCallback = (position) => {
-    console.log(position);
-  };
-  function positionDenied() {
-    console.log("denied prompt");
-  }
+  const { permissionState, setPosition } = useContainer(CurrentPosition);
   function handler() {
-    navigator.geolocation.getCurrentPosition(revealPosition, positionDenied);
+    function success(p: Position) {
+      // TODO: display snackbar "Location updated" with new, more accurate location
+      setPosition(p);
+    }
+    function error(e: PositionError) {
+      // TODO: display snackbar with error
+      console.log(e);
+    }
+    navigator.geolocation.getCurrentPosition(success, error, {});
   }
   function handlerDismiss() {
     setVisible(false);

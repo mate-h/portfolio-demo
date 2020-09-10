@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-export function usePersistedState(key: string, defaultValue: any) {
-  const [state, setState] = useState(() => {
+export function usePersistedState<T>(key: string, defaultValue?: any) {
+  const [state, setState] = useState<T>(() => {
     const item = localStorage.getItem(key);
     if (item !== null) {
       return JSON.parse(item);
@@ -10,7 +10,19 @@ export function usePersistedState(key: string, defaultValue: any) {
     return defaultValue;
   });
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(state));
+    if (state !== undefined) localStorage.setItem(key, JSON.stringify(state));
   }, [key, state]);
-  return [state, setState];
+  function resetState(overrideDefault?: any) {
+    if (overrideDefault !== undefined) {
+      setState(overrideDefault);
+      localStorage.setItem(key, JSON.stringify(overrideDefault));
+    } else if (defaultValue) {
+      setState(defaultValue);
+      localStorage.setItem(key, JSON.stringify(defaultValue));
+    } else {
+      setState(undefined as any);
+      localStorage.removeItem(key);
+    }
+  }
+  return [state, setState, resetState];
 }
