@@ -187,10 +187,10 @@ p.paragraph::after {
   border: 1px solid var(--color);
   transform: scale(var(--t));
   content: "";
-  top: calc(-1px - var(--t) * 100%);
-  bottom: calc(-1px - var(--t) * 100%);
-  left: calc(-1px - var(--t) * 100%);
-  right: calc(-1px - var(--t) * 100%);
+  top: calc(-1px - (var(--t) * 100%));
+  bottom: calc(-1px - (var(--t) * 100%));
+  left: calc(-1px - (var(--t) * 100%));
+  right: calc(-1px - (var(--t) * 100%));
   border-radius: calc(var(--displayScale) * 0.5rem);
 }
 
