@@ -158,3 +158,21 @@
   font-feature-settings: "cpsp";
   font-variation-settings: "wght" 550;
 }
+
+p.paragraph {
+  --hl: var(--leading) / 2;
+  margin-bottom: calc(var(--hl) * -0.0625rem);
+  line-height: calc(var(--leading) * 0.0625rem);
+}
+p.paragraph::before {
+  display: inline-block;
+  height: calc((var(--leading) + var(--top, 0)) * 0.0625rem);
+  content: "";
+}
+p.paragraph::after {
+  display: inline-block;
+  vertical-align: calc((var(--bottom, 0) + var(--hl)) * -0.0625rem);
+  /* Previewing element height in debug only, not significant */
+  /* height: calc((var(--bottom, 0) + var(--hl)) * 0.25rem); */
+  content: "";
+}

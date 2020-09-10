@@ -18862,6 +18862,19 @@ video {
   --pixel: 1px;
   --rem: 16; /* root element unit */
   --font-family: Inter;
+  /* Material Design type scale */
+  --text-7xl: 96;
+  --text-6xl: 60;
+  --text-5xl: 48;
+  --text-4xl: 34;
+  --text-3xl: 30;
+  --text-2xl: 24;
+  --text-xl: 20;
+  --text-lg: 18;
+  --text-base: 16;
+  --text-sm: 14;
+  --text-xs: 12;
+  --text-2xs: 10;
 }
 
 @supports (font-variation-settings: normal) {
@@ -18895,6 +18908,132 @@ video {
     --displayScale: 4;
     --pixel: 0.25px;
   }
+}
+
+/* Material Design Typography Components */
+
+/* Leading must be a value divisible by 4 to maintain the grid. */
+
+.headline1 {
+  font-size: 6rem;
+  font-weight: 300;
+  --leading: 112;
+  letter-spacing: calc(-1.5 / var(--text-7xl) * 1em);
+  font-variation-settings: "wght" 250;
+}
+
+.headline2 {
+  font-size: 3.75rem;
+  font-weight: 300;
+  --leading: 72;
+  letter-spacing: calc(-0.5 / var(--text-6xl) * 1em);
+  font-variation-settings: "wght" 300;
+}
+
+.headline3 {
+  font-size: 3rem;
+  font-weight: 400;
+  --leading: 56;
+  font-variation-settings: "wght" 350;
+}
+
+.headline4 {
+  font-size: 2.125rem;
+  font-weight: 400;
+  --leading: 40;
+  letter-spacing: calc(0.25 / var(--text-4xl) * 1em);
+  font-variation-settings: "wght" 400;
+}
+
+.headline5 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  --leading: 28;
+  font-variation-settings: "wght" 450;
+}
+
+.headline6 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  --leading: 24;
+  letter-spacing: calc(0.15 / var(--text-xl) * 1em);
+  font-variation-settings: "wght" 550;
+}
+
+.subtitle1 {
+  font-size: 1rem;
+  font-weight: 400;
+  --leading: 24;
+  letter-spacing: calc(0.15 / var(--text-base) * 1em);
+}
+
+.subtitle2 {
+  font-size: 0.875rem;
+  font-weight: 500;
+  --leading: 24;
+  letter-spacing: calc(0.1 / var(--text-sm) * 1em);
+  font-variation-settings: "wght" 550;
+}
+
+.body1 {
+  font-size: 1rem;
+  font-weight: 400;
+  --leading: 28;
+  letter-spacing: calc(0.44 / var(--text-base) * 1em);
+}
+
+.body2 {
+  font-size: 0.875rem;
+  font-weight: 400;
+  --leading: 20;
+  letter-spacing: calc(0.25 / var(--text-sm) * 1em);
+}
+
+.button {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  --leading: 16;
+  letter-spacing: calc(1.35 / var(--text-sm) * 1em);
+  font-feature-settings: "cpsp";
+  font-variation-settings: "wght" 550;
+}
+
+.caption {
+  font-size: 0.75rem;
+  font-weight: 400;
+  --leading: 16;
+  letter-spacing: calc(0.4 / var(--text-xs) * 1em);
+}
+
+.overline {
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  --leading: 16;
+  letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
+  font-feature-settings: "cpsp";
+  font-variation-settings: "wght" 550;
+}
+
+p.paragraph {
+  --hl: var(--leading) / 2;
+  margin-bottom: calc(var(--hl) * -0.0625rem);
+  line-height: calc(var(--leading) * 0.0625rem);
+}
+
+p.paragraph::before {
+  display: inline-block;
+  height: calc((var(--leading) + var(--top, 0)) * 0.0625rem);
+  content: "";
+}
+
+p.paragraph::after {
+  display: inline-block;
+  vertical-align: calc((var(--bottom, 0) + var(--hl)) * -0.0625rem);
+  /* Previewing element height in debug only, not significant */
+  /* height: calc((var(--bottom, 0) + var(--hl)) * 0.25rem); */
+  content: "";
 }
 
 @media (min-width: 640px) {

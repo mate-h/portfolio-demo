@@ -1,12 +1,11 @@
 import React from "react";
+import { Paragraph } from "./components/Paragraph";
 
 function App() {
   return (
     <main className="container mx-auto">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+        <Paragraph className="headline6">Simple weather application</Paragraph>
         <a
           className="App-link"
           href="https://reactjs.org"
