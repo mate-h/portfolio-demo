@@ -14,37 +14,6 @@ function usePosition() {
   const [position, setPosition, resetPosition] = usePersistedState(
     "app.lastPosition"
   );
-  // run effect on component mount
-  useEffect(() => {
-    navigator.permissions
-      .query({
-        name: "geolocation",
-      })
-      .then(function (result) {
-        if (result.state === "granted") {
-          setPermissionState(result.state);
-          navigator.geolocation.getCurrentPosition(
-            successCallback,
-            errorCallback,
-            {}
-          );
-        } else if (result.state === "prompt") {
-          setPermissionState(result.state);
-        } else if (result.state === "denied") {
-          setPermissionState(result.state);
-        }
-        result.onchange = function () {
-          setPermissionState(result.state);
-        };
-      });
-  }, []);
-
-  useEffect(() => {
-    if (permissionState === "denied") {
-      resetPosition();
-    }
-  }, [permissionState]);
-
   const successCallback: PositionCallback = (position) => {
     const copy = {
       timestamp: position.timestamp,
@@ -71,6 +40,38 @@ function usePosition() {
     //   3: timed out
   };
 
+  // limit running the effect on component mount
+  useEffect(() => {
+    navigator.permissions
+      .query({
+        name: "geolocation",
+      })
+      .then(function (result) {
+        if (result.state === "granted") {
+          setPermissionState(result.state);
+          navigator.geolocation.getCurrentPosition(
+            successCallback,
+            errorCallback,
+            {}
+          );
+        } else if (result.state === "prompt") {
+          setPermissionState(result.state);
+        } else if (result.state === "denied") {
+          setPermissionState(result.state);
+        }
+        result.onchange = function () {
+          setPermissionState(result.state);
+        };
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    if (permissionState === "denied") {
+      resetPosition();
+    }
+  }, [permissionState, resetPosition]);
+
   return {
     permissionState,
     position: position as Position,
@@ -83,7 +84,7 @@ export const CurrentWeather = createContainer(useCurrentWeather);
 export const CurrentPosition = createContainer(usePosition);
 
 function Display() {
-  const { loading, error, data } = useContainer(CurrentWeather);
+  const { loading, data } = useContainer(CurrentWeather);
   if (loading) return null;
 
   return <code>{data?.name}</code>;

@@ -23,8 +23,6 @@ export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
 
   const { loading, data } = useFetchGeolocation({}, {});
 
-  console.log(position, data, permissionState);
-
   const url = new URL(getCurrentUrl);
   const fetchHook = useFetch<GetCurrentResponse>(url.toString(), {
     ...weatherUpdateOptions,
@@ -62,6 +60,7 @@ export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
         })
       );
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, data, permissionState, position]);
 
   return fetchHook;

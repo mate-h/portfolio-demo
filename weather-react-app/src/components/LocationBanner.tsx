@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Paragraph } from "./Paragraph";
 import { usePersistedState } from "../lib/hooks";
 import { useContainer } from "unstated-next";
@@ -37,7 +37,7 @@ export function LocationBanner() {
       </div>
     );
 
-  // user has already granted permission
+  // only render if permission can be granted by prompt
   if (permissionState !== "prompt") return null;
 
   return (
