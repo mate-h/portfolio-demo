@@ -2,6 +2,7 @@ import React from "react";
 import { createContainer, useContainer } from "unstated-next";
 import { Paragraph } from "./components/Paragraph";
 import { useFetchCurrent } from "./lib/openweathermap/api";
+import { LocationBanner } from "./components/LocationBanner";
 
 function useCurrentWeather() {
   return useFetchCurrent({}, {});
@@ -22,6 +23,7 @@ function App() {
   return (
     <CurrentWeather.Provider>
       <main className="container mx-auto">
+        <LocationBanner />
         <header className="App-header">
           <Paragraph className="headline6">
             Simple weather application
