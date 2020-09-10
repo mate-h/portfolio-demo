@@ -25,3 +25,31 @@ export const weatherUpdateOptions: IncomingOptions = {
   ...defaultOptions,
   cacheLife: 20 * 60 * 1000,
 };
+
+const lookup = {
+  "person.crop.circle.fill": [56256, 56942],
+  "checkmark.circle.fill": [56256, 56419],
+  "chevron.left": [56256, 56713],
+  "chevron.right": [56256, 56714],
+  heart: [56256, 57012],
+  "heart.fill": [56256, 57013],
+  star: [56256, 57026],
+  "star.fill": [56256, 57027],
+  "star.lefthalf.fill": [56256, 57028],
+  plus: [56256, 56700],
+  minus: [56256, 56701],
+  "trash.fill": [56256, 56850],
+  circle: [56256, 56320],
+  "xmark.circle.fill": [56256, 56417],
+  "circle.lefthalf.fill": [56256, 56322],
+  "circle.righthalf.fill": [56256, 56323],
+  doc: [56256, 56887],
+  cloud: [56256, 56770],
+  "cloud.fill": [56256, 56771],
+  "cloud.fog": [56256, 56778],
+  "cloud.fog.fill": [56256, 56779],
+};
+
+export const icon = (name: keyof typeof lookup) => {
+  return lookup[name].map((n: number) => String.fromCharCode(n)).join("");
+};

@@ -1,122 +1,37 @@
-import React, { useEffect, useState } from "react";
-import { createContainer, useContainer } from "unstated-next";
+import React from "react";
+import { createContainer } from "unstated-next";
 import { Paragraph } from "./components/Paragraph";
-import { useFetchCurrent } from "./lib/openweathermap/api";
 import { LocationBanner } from "./components/LocationBanner";
-import { usePersistedState } from "./lib/hooks";
-
-function useCurrentWeather() {
-  return useFetchCurrent({}, {});
-}
-
-function usePosition() {
-  const [permissionState, setPermissionState] = useState<PermissionState>();
-  const [position, setPosition, resetPosition] = usePersistedState(
-    "app.lastPosition"
-  );
-  const successCallback: PositionCallback = (position) => {
-    const copy = {
-      timestamp: position.timestamp,
-      coords: {
-        accuracy: position.coords.accuracy,
-        altitude: position.coords.altitude,
-        altitudeAccuracy: position.coords.altitudeAccuracy,
-        heading: position.coords.heading,
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-        speed: position.coords.speed,
-      },
-    };
-    setPosition(copy);
-  };
-  const errorCallback: PositionErrorCallback = (error) => {
-    console.log(error);
-    // denied prompt
-
-    // error.code can be:
-    //   0: unknown error
-    //   1: permission denied
-    //   2: position unavailable (error response from location provider)
-    //   3: timed out
-  };
-
-  // limit running the effect on component mount
-  useEffect(() => {
-    navigator.permissions
-      .query({
-        name: "geolocation",
-      })
-      .then(function (result) {
-        if (result.state === "granted") {
-          setPermissionState(result.state);
-          navigator.geolocation.getCurrentPosition(
-            successCallback,
-            errorCallback,
-            {}
-          );
-        } else if (result.state === "prompt") {
-          setPermissionState(result.state);
-        } else if (result.state === "denied") {
-          setPermissionState(result.state);
-        }
-        result.onchange = function () {
-          setPermissionState(result.state);
-        };
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (permissionState === "denied") {
-      resetPosition();
-    }
-  }, [permissionState, resetPosition]);
-
-  return {
-    permissionState,
-    position: position as Position,
-    setPosition: successCallback,
-  };
-}
+import { useCurrentWeather, usePosition } from "./lib/hooks";
+import { WeatherCard } from "./components/WeatherCard";
 
 export const CurrentWeather = createContainer(useCurrentWeather);
 
 export const CurrentPosition = createContainer(usePosition);
 
-function Display() {
-  const { loading, data } = useContainer(CurrentWeather);
-  if (loading) return null;
-
-  return <code>{data?.name}</code>;
-}
-
-function Display2() {
-  const { position } = useContainer(CurrentPosition);
-  return <code>{JSON.stringify(position)}</code>;
-}
-
 function App() {
+  const backgroundStyle = {
+    "--src": "url(background/weather-bg-1.jpg)",
+  };
   return (
     <CurrentPosition.Provider>
       <CurrentWeather.Provider>
-        <main className="container mx-auto">
+        <main
+          style={backgroundStyle as any}
+          className="app-background container mx-auto p-4 md:p-6"
+        >
           <LocationBanner />
-          <header className="App-header">
-            <Paragraph className="headline6">
-              Simple weather application
-            </Paragraph>
-            <Display />
-            <Display2 />
-            <br />
-            <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learn React
-            </a>
-          </header>
+          <Paragraph className="headline6 text-white">
+            Simple weather application
+          </Paragraph>
+          <div className="my-4 md:my-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            <WeatherCard />
+            <WeatherCard />
+            <WeatherCard />
+            <WeatherCard />
+            <WeatherCard />
+            <WeatherCard />
+          </div>
         </main>
       </CurrentWeather.Provider>
     </CurrentPosition.Provider>
