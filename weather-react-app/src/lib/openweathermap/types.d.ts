@@ -21,6 +21,56 @@ declare module "OpenWeatherMap" {
     lon: number;
     /** Format: {zip code},{country code}. Please note if country is not specified then the search works for USA as a default. */
     zip: string;
+
+    /** You can use lang parameter to get the output in your language.
+Translation is applied for the city name and description fields. */
+    lang:
+      | "af"
+      | "al"
+      | "ar"
+      | "az"
+      | "bg"
+      | "ca"
+      | "cz"
+      | "da"
+      | "de"
+      | "el"
+      | "en"
+      | "eu"
+      | "fa"
+      | "fi"
+      | "fr"
+      | "gl"
+      | "he"
+      | "hi"
+      | "hr"
+      | "hu"
+      | "id"
+      | "it"
+      | "ja"
+      | "kr"
+      | "la"
+      | "lt"
+      | "mk"
+      | "no"
+      | "nl"
+      | "pl"
+      | "pt"
+      | "pt_br"
+      | "ro"
+      | "ru"
+      | "sv"
+      | "sk"
+      | "sl"
+      | "es"
+      | "sr"
+      | "th"
+      | "tr"
+      | "uk"
+      | "vi"
+      | "zh_cn"
+      | "zh_tw"
+      | "zu";
   }>;
 
   export type GetCurrentResponse = {

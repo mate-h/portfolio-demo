@@ -13,6 +13,7 @@ import { CurrentPosition } from "../../App";
 
 const defaultParams: GetCurrentParams = {
   appid,
+  lang: new (Intl as any).Locale(navigator.language).language,
 };
 
 export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
@@ -39,7 +40,7 @@ export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
     const route = (o: GetCurrentParams) => `?${new URLSearchParams(o as any)}`;
 
     // use latitude and longitude if position is available
-    if (position) {
+    if (position && permissionState !== "denied") {
       fetchHook.get(
         route({
           lat: position.coords.latitude,
