@@ -17,23 +17,25 @@ function App() {
   return (
     <main
       style={backgroundStyle as any}
-      className="app-background container mx-auto p-4 md:p-6"
+      className="app-background container mx-auto px-4 md:px-6"
     >
       <LocationBanner />
-      <LanguagePicker />
-      <div className="my-4 md:my-6">
-        <Paragraph className="headline5 sm:headline4 text-white">
-          {t("title")}
-        </Paragraph>
-      </div>
+      <LanguagePicker className="my-4 md:my-6" />
+      <Paragraph
+        top={-4}
+        bottom={4}
+        className="headline5 sm:headline4 text-white"
+      >
+        {t("title")}
+      </Paragraph>
 
       <div className="my-4 md:my-6">
         <Paragraph bottom={8} className="overline text-white">
           {`${t("location")} `}
           <i
             tabIndex={-1}
-            title={t('location.description')}
-            aria-label={t('location.description')}
+            title={t("location.description")}
+            aria-label={t("location.description")}
             className="text-sm cursor-pointer"
           >
             {icon("info.circle")}
@@ -46,7 +48,7 @@ function App() {
       <CityPicker />
       <div className="my-4 md:my-6">
         <Paragraph bottom={8} className="overline text-white">
-          {t('yourCities')}
+          {t("yourCities")}
         </Paragraph>
 
         <div className={gridComponent}>

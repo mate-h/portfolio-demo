@@ -9,7 +9,7 @@ import {
 import { useContainer } from "unstated-next";
 import { Settings } from "..";
 import { t } from "../lib/translations";
-export function LanguagePicker() {
+export function LanguagePicker({ className }: { className?: string }) {
   const {
     settings: { locale },
     updateSettings,
@@ -23,7 +23,7 @@ export function LanguagePicker() {
     });
   }
   return (
-    <div className="sm:flex sm:flex-wrap">
+    <div className={["sm:flex sm:flex-wrap", className].join(" ")}>
       <label className="cursor-pointer" htmlFor="language">
         <Paragraph bottom={8} className="caption text-white">
           {t("language", locale)}

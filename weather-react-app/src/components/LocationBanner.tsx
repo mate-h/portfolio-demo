@@ -4,8 +4,9 @@ import { usePersistedState } from "../lib/hooks";
 import { useContainer } from "unstated-next";
 import { CurrentPosition } from "..";
 import { useTranslation } from "../lib/translations";
+import { icon } from "../lib/config";
 
-export function LocationBanner() {
+export function LocationBanner({ className }: { className?: string }) {
   const [visible, setVisible] = usePersistedState(
     "locationBanner.visible",
     true
@@ -27,14 +28,23 @@ export function LocationBanner() {
     setVisible(false);
   }
   if (!visible) return null;
-
+  const bannerComponent = "clearfix full-width bg-white sm:flex p-2 md:p-4";
   if (permissionState === "denied")
     return (
-      <div>
-        <Paragraph className="body2">
-          {t('locationBanner.denied')}
+      <div className={[bannerComponent, className].join(" ")}>
+        <Paragraph className="flex-grow transform -translate-y-1 body2 text-black text-opacity-87 sm:truncate">
+          {t("locationBanner.denied")}
         </Paragraph>
-        <button onClick={handlerDismiss}>{t('locationBanner.dismiss')}</button>
+        <button
+          onClick={handlerDismiss}
+          className="float-right flex-shrink-0 h-10 sm:h-6 button-states button-states-light relative overflow-hidden rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
+        >
+          <div className="h-10 sm:h-6 overflow-hidden">
+            <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-primary">
+              {t("locationBanner.dismiss")}
+            </Paragraph>
+          </div>
+        </button>
       </div>
     );
 
@@ -42,12 +52,31 @@ export function LocationBanner() {
   if (permissionState !== "prompt") return null;
 
   return (
-    <div>
-      <Paragraph className="body2">
-        {t('locationBanner.prompt')}
+    <div className={[bannerComponent, className].join(" ")}>
+      <Paragraph className="flex-grow transform -translate-y-1 body2 text-black text-opacity-87 sm:truncate">
+        <i>{icon("location.slash.fill")}</i>
+        {` ${t("locationBanner.prompt")}`}
       </Paragraph>
-      <button onClick={handlerDismiss}>{t('locationBanner.dismiss')}</button>
-      <button onClick={handler}>{t('locationBanner.allow')}</button>
+      <button
+        onClick={handlerDismiss}
+        className="mx-0 sm:mx-4 md:mx-6 float-right flex-shrink-0 h-10 sm:h-6 button-states button-states-light relative overflow-hidden rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
+      >
+        <div className="h-10 sm:h-6 overflow-hidden">
+          <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-primary">
+            {t("locationBanner.dismiss")}
+          </Paragraph>
+        </div>
+      </button>
+      <button
+        onClick={handler}
+        className="mx-4 sm:mx-0 float-right flex-shrink-0 h-10 sm:h-6 button-states button-states-light relative overflow-hidden rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
+      >
+        <div className="h-10 sm:h-6 overflow-hidden">
+          <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-primary">
+            {t("locationBanner.allow")}
+          </Paragraph>
+        </div>
+      </button>
     </div>
   );
 }

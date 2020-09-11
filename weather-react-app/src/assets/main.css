@@ -19201,28 +19201,57 @@ i[tabindex] {
   display: none;
 }
 
-.button-states-dark::before {
+.button-states::before {
   position: absolute;
   content: "";
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 255, 255, 0);
+  background-color: var(--states-bg);
   pointer-events: none;
   transition: background-color linear 70ms;
 }
 
-.button-states-dark:hover::before {
-  background-color: rgba(255, 255, 255, var(--state-hover-dark));
+.button-states-dark {
+  --states-bg: rgba(255, 255, 255, 0);
 }
 
-.button-states-dark:focus::before {
-  background-color: rgba(255, 255, 255, var(--state-focus-dark));
+.button-states-dark:hover {
+  --states-bg: rgba(255, 255, 255, var(--state-hover-dark));
 }
 
-.button-states-dark:active::before {
-  background-color: rgba(255, 255, 255, var(--state-pressed-dark));
+.button-states-dark:focus {
+  --states-bg: rgba(255, 255, 255, var(--state-focus-dark));
+}
+
+.button-states-dark:active {
+  --states-bg: rgba(255, 255, 255, var(--state-pressed-dark));
+}
+
+.button-states-light {
+  --states-bg: rgba(0, 0, 0, 0);
+}
+
+.button-states-light:hover {
+  --states-bg: rgba(0, 0, 0, var(--state-hover-light));
+}
+
+.button-states-light:focus {
+  --states-bg: rgba(0, 0, 0, var(--state-focus-light));
+}
+
+.button-states-light:active {
+  --states-bg: rgba(0, 0, 0, var(--state-pressed-light));
+}
+
+.full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 @media (min-width: 640px) {

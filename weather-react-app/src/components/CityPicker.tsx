@@ -14,7 +14,7 @@ export function CityPicker() {
   return (
     <div className="inline-block sm:flex sm:flex-wrap">
       <label className="cursor-pointer" htmlFor="city">
-        <Paragraph className="caption text-white">{t('cityName')}</Paragraph>
+        <Paragraph className="caption text-white">{t("cityName")}</Paragraph>
       </label>
 
       <input
@@ -26,11 +26,11 @@ export function CityPicker() {
         id="city"
       />
 
-      <button className="block h-10 sm:h-6 button-states-dark relative overflow-hidden bg-primary rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline">
+      <button className="block h-10 sm:h-6 button-states button-states-dark relative overflow-hidden bg-primary rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline">
         <div className="h-10 sm:h-6 overflow-hidden">
           <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-white">
             <i>{icon("plus")}</i>
-            {` ${t('addCity')}`}
+            {` ${t("addCity")}`}
           </Paragraph>
         </div>
       </button>
