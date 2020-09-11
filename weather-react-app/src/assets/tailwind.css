@@ -287,3 +287,26 @@ i[tabindex] {
     text-transform: none;
   }
 }
+@responsive {
+  .dropdown-right-1::after {
+    right: 0.25rem;
+  }
+  .dropdown-right-2::after {
+    right: 0.5rem;
+  }
+  .dropdown-right-3::after {
+    right: 0.75rem;
+  }
+}
+.dropdown::after {
+  content: "\100188";
+  font-family: "SF Symbols";
+  color: rgba(0, 0, 0, 0.54);
+  position: absolute;
+  @apply text-xs;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}

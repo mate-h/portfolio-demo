@@ -9,11 +9,11 @@ import {
 import { useEffect } from "react";
 import { useFetchGeolocation } from "../ip-api/api";
 import { useContainer } from "unstated-next";
-import { CurrentPosition } from "../../App";
+import { CurrentPosition, Settings } from "../../App";
+import { getLangParam } from "../languages";
 
 const defaultParams: GetCurrentParams = {
   appid,
-  lang: new (Intl as any).Locale(navigator.language).language,
 };
 
 export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
@@ -23,6 +23,12 @@ export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
   const { position, permissionState } = useContainer(CurrentPosition);
 
   const { loading, data } = useFetchGeolocation({}, {});
+
+  const {
+    settings: { locale },
+  } = useContainer(Settings);
+
+  defaultParams.lang = getLangParam(locale);
 
   const url = new URL(getCurrentUrl);
   const fetchHook = useFetch<GetCurrentResponse>(url.toString(), {

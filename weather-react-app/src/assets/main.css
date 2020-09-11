@@ -19147,6 +19147,31 @@ i[tabindex] {
   }
 }
 
+.dropdown-right-1::after {
+  right: 0.25rem;
+}
+
+.dropdown-right-2::after {
+  right: 0.5rem;
+}
+
+.dropdown-right-3::after {
+  right: 0.75rem;
+}
+
+.dropdown::after {
+  content: "\100188";
+  font-family: "SF Symbols";
+  color: rgba(0, 0, 0, 0.54);
+  position: absolute;
+  font-size: 0.75rem;
+  pointer-events: none;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+}
+
 @media (min-width: 640px) {
   .sm\:container {
     width: 100%;
@@ -37482,6 +37507,18 @@ i[tabindex] {
     letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
     font-feature-settings: "cpsp";
     font-variation-settings: "wght" 550;
+  }
+
+  .sm\:dropdown-right-1::after {
+    right: 0.25rem;
+  }
+
+  .sm\:dropdown-right-2::after {
+    right: 0.5rem;
+  }
+
+  .sm\:dropdown-right-3::after {
+    right: 0.75rem;
   }
 }
 
@@ -55821,6 +55858,18 @@ i[tabindex] {
     font-feature-settings: "cpsp";
     font-variation-settings: "wght" 550;
   }
+
+  .md\:dropdown-right-1::after {
+    right: 0.25rem;
+  }
+
+  .md\:dropdown-right-2::after {
+    right: 0.5rem;
+  }
+
+  .md\:dropdown-right-3::after {
+    right: 0.75rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -74159,6 +74208,18 @@ i[tabindex] {
     font-feature-settings: "cpsp";
     font-variation-settings: "wght" 550;
   }
+
+  .lg\:dropdown-right-1::after {
+    right: 0.25rem;
+  }
+
+  .lg\:dropdown-right-2::after {
+    right: 0.5rem;
+  }
+
+  .lg\:dropdown-right-3::after {
+    right: 0.75rem;
+  }
 }
 
 @media (min-width: 1280px) {
@@ -92496,5 +92557,17 @@ i[tabindex] {
     letter-spacing: calc(1.5 / var(--text-2xs) * 1em);
     font-feature-settings: "cpsp";
     font-variation-settings: "wght" 550;
+  }
+
+  .xl\:dropdown-right-1::after {
+    right: 0.25rem;
+  }
+
+  .xl\:dropdown-right-2::after {
+    right: 0.5rem;
+  }
+
+  .xl\:dropdown-right-3::after {
+    right: 0.75rem;
   }
 }

@@ -39,6 +39,7 @@ export function useCurrentWeather() {
 export function useSettings() {
   const [settings, setSettings] = usePersistedState("app.settings", {
     imperial: false,
+    locale: navigator.language,
   });
 
   function updateSettings(newSettings: any) {
@@ -48,7 +49,10 @@ export function useSettings() {
     });
   }
 
-  return { settings: settings as { imperial: boolean }, updateSettings };
+  return {
+    settings: settings as { imperial: boolean; locale: string },
+    updateSettings,
+  };
 }
 
 export function usePosition() {

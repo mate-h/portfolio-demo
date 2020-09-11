@@ -4,7 +4,7 @@ import { icon } from "../../lib/config";
 import { useContainer } from "unstated-next";
 import { CurrentWeather, Settings } from "../../App";
 import { relativeFormat, formatTemperature } from "../../lib/format";
-import conditions from "../../lib/openweathermap/conditions";
+import icons from "../../lib/openweathermap/icons";
 
 export function WeatherCard({ city }: { city?: string }) {
   const { loading, data } = useContainer(CurrentWeather);
@@ -31,7 +31,7 @@ export function WeatherCard({ city }: { city?: string }) {
           }}
           className="text-2xl"
         >
-          {icon(conditions[data.weather[0].icon])}
+          {icon(icons[data.weather[0].icon])}
         </i>
         <div className="px-4 md:px-6">
           <Paragraph

@@ -31,6 +31,8 @@ const lookup = {
   "checkmark.circle.fill": 56419,
   "chevron.left": 56713,
   "chevron.right": 56714,
+  "chevron.up": 56711,
+  "chevron.down": 56712,
   heart: 57012,
   "heart.fill": 57013,
   star: 57026,
