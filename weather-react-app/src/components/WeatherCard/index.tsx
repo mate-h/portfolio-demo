@@ -16,8 +16,7 @@ export function WeatherCard({ city }: { city?: string }) {
     settings.imperial ? "fahrenheit" : "celsius"
   );
   return (
-    <div className="app-background-cover relative bg-black bg-opacity-72 text-white p-4 md:p-6 rounded-lg">
-      <div className="hairline-border-outside" />
+    <div className="shadow-hairline shadow-hairline-dark app-background-cover relative bg-black bg-opacity-72 text-white p-4 md:p-6 rounded-lg">
       <Paragraph className="caption text-opacity-72 text-white">
         {relativeFormat(data.dt * 1000, settings.locale)}
       </Paragraph>

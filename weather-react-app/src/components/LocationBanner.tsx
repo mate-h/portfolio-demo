@@ -59,7 +59,7 @@ export function LocationBanner({ className }: { className?: string }) {
       </Paragraph>
       <button
         onClick={handlerDismiss}
-        className="mx-0 sm:mx-4 md:mx-6 float-right flex-shrink-0 h-10 sm:h-6 button-states button-states-light relative overflow-hidden rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
+        className="transition-shadow duration-150 mx-0 sm:mx-4 md:mx-6 float-right flex-shrink-0 h-10 sm:h-6 button-states button-states-light relative overflow-hidden rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
       >
         <div className="h-10 sm:h-6 overflow-hidden">
           <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-primary">
@@ -69,7 +69,7 @@ export function LocationBanner({ className }: { className?: string }) {
       </button>
       <button
         onClick={handler}
-        className="mx-4 sm:mx-0 float-right flex-shrink-0 h-10 sm:h-6 button-states button-states-light relative overflow-hidden rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
+        className="transition-shadow duration-150 mx-4 sm:mx-0 float-right flex-shrink-0 h-10 sm:h-6 button-states button-states-light relative overflow-hidden rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
       >
         <div className="h-10 sm:h-6 overflow-hidden">
           <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-primary">

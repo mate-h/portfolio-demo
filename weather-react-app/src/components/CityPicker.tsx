@@ -17,16 +17,18 @@ export function CityPicker() {
         <Paragraph className="caption text-white">{t("cityName")}</Paragraph>
       </label>
 
-      <input
-        onFocus={(e) => e.target.select()}
-        onChange={handler}
-        placeholder="Budapest, HU"
-        className="my-2 sm:my-0 mx-0 sm:mx-4 md:mx-6 h-10 sm:h-6 rounded px-4 sm:px-2 appearance-none outline-none focus:shadow-outline"
-        name="city"
-        id="city"
-      />
+      <span className="relative button-states button-states-light my-2 sm:my-0 mx-0 sm:mx-4 md:mx-6">
+        <input
+          onFocus={(e) => e.target.select()}
+          onChange={handler}
+          placeholder="Budapest, HU"
+          className="transition-shadow duration-150 shadow-hairline shadow-hairline-light h-10 sm:h-6 rounded px-4 sm:px-2 appearance-none outline-none focus:shadow-outline"
+          name="city"
+          id="city"
+        />
+      </span>
 
-      <button className="block h-10 sm:h-6 button-states button-states-dark relative overflow-hidden bg-primary rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline">
+      <button className="transition-shadow duration-150 shadow-hairline shadow-hairline-light block h-10 sm:h-6 button-states button-states-dark relative overflow-hidden bg-primary rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline">
         <div className="h-10 sm:h-6 overflow-hidden">
           <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-white">
             <i>{icon("plus")}</i>
