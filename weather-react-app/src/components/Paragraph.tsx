@@ -5,6 +5,7 @@ export type ParagraphProps = Partial<{
   bottom: number;
   leading: number;
   className: string;
+  onClick: (ev: React.MouseEvent<HTMLParagraphElement>) => void;
 }>;
 
 export const Paragraph: React.FC<React.PropsWithChildren<ParagraphProps>> = ({
@@ -13,6 +14,7 @@ export const Paragraph: React.FC<React.PropsWithChildren<ParagraphProps>> = ({
   bottom,
   leading,
   className,
+  onClick,
 }) => {
   const node = useRef<HTMLParagraphElement>(null);
   useEffect(() => {
@@ -24,7 +26,11 @@ export const Paragraph: React.FC<React.PropsWithChildren<ParagraphProps>> = ({
     }
   });
   return (
-    <p ref={node} className={["paragraph", className].join(" ")}>
+    <p
+      onClick={onClick}
+      ref={node}
+      className={["paragraph", className].join(" ")}
+    >
       {children}
     </p>
   );

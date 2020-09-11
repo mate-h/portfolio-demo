@@ -25,11 +25,30 @@ export function usePersistedState<T>(key: string, defaultValue?: any) {
       localStorage.removeItem(key);
     }
   }
-  return [state, setState, resetState];
+  return [
+    state as T,
+    setState as React.Dispatch<React.SetStateAction<T>>,
+    resetState,
+  ];
 }
 
 export function useCurrentWeather() {
   return useFetchCurrent({}, {});
+}
+
+export function useSettings() {
+  const [settings, setSettings] = usePersistedState("app.settings", {
+    imperial: false,
+  });
+
+  function updateSettings(newSettings: any) {
+    setSettings({
+      ...settings,
+      ...newSettings,
+    });
+  }
+
+  return { settings: settings as { imperial: boolean }, updateSettings };
 }
 
 export function usePosition() {

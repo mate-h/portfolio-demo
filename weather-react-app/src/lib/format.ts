@@ -23,36 +23,141 @@ export const relativeFormat = (d: any) => {
     if (minutes >= 1) {
       return rtf.format(Math.ceil(-minutes), "minute");
     }
-    return ({
-      "hu-HU": "most",
-      en: "now",
-      "en-US": "now",
-      "en-GB": "now",
-    } as any)[language];
+    return (
+      (now as any)[new (Intl as any).Locale(language).minimize().toString()] ||
+      (now as any)[new (Intl as any).Locale(language).language]
+    );
   } catch (e) {
     return dateFormat(d);
   }
 };
 
-export const formatCelsius = (kelvin: number) => {
+export const formatTemperature = (kelvin: number, unit?: string) => {
   const formatter = new Intl.NumberFormat(language, {
     style: "unit",
-    unit: "celsius",
+    unit: unit || "celsius",
     maximumFractionDigits: 0,
     minimumFractionDigits: 0,
   } as any);
   const c = kelvin - 273.15;
-  const unit = formatter
+  const f = ((kelvin - 273.15) * 9) / 5 + 32;
+  const unitPart = formatter
     .formatToParts(c)
     .find((p) => (p.type as any) === "unit");
-  const s = formatter.format(c);
-  if (unit) {
-    const location = s.indexOf(unit.value);
+  const s = formatter.format(unit === "fahrenheit" ? f : c);
+  if (unitPart) {
+    const location = s.indexOf(unitPart.value);
 
     return [
       { value: s.slice(0, location) },
-      { value: unit.value, unit: true },
-      { value: s.slice(location + unit.value.length) },
+      { value: unitPart.value, unit: true },
+      { value: s.slice(location + unitPart.value.length) },
     ].filter((a) => a.value);
   } else return [{ value: s }];
+};
+
+const now = {
+  en: "now",
+  eu: "orain",
+  am: "አሁን",
+  ceb: "karon",
+  fy: "no",
+  gu: "હવે",
+  haw: "kēia manawa",
+  hu: "Most",
+  ga: "anois",
+  kk: "қазір",
+  ky: "азыр",
+  lb: "elo",
+  mt: "issa",
+  my: "အခု",
+  st: "hona joale",
+  fa: "اکنون",
+  si: "දැන්",
+  sw: "sasa",
+  xh: "ngoku",
+  zu: "manje",
+  yo: "bayi",
+  cy: "nawr",
+  su: "ayeuna",
+  sd: "هاڻي",
+  gd: "a-nis",
+  ps: "اوس",
+  mn: "одоо",
+  mg: "ankehitriny",
+  la: "nunc",
+  ku: "niha",
+  kn: "ಈಗ",
+  ig: "ugbu a",
+  hmn: "tam sim no",
+  ha: "yanzu",
+  ka: "ახლა",
+  co: "avà",
+  bs: "sad",
+  az: "İndi",
+  sq: "tani",
+  yi: "איצט",
+  uz: "hozir",
+  so: "hadda",
+  sn: "ikozvino",
+  sm: "nei",
+  ne: "अब",
+  mi: "ināianei",
+  mk: "сега",
+  lo: "ດຽວນີ້",
+  km: "ឥឡូវ​នេះ",
+  jv: "saiki",
+  is: "núna",
+  hi: "अभी",
+  ht: "kounye a",
+  gl: "agora",
+  ny: "tsopano",
+  be: "зараз",
+  hy: "հիմա",
+  af: "nou",
+  ml: "ഇപ്പോൾ",
+  ur: "ابھی",
+  te: "ఇప్పుడు",
+  ta: "இப்போது",
+  mr: "आता",
+  ms: "sekarang",
+  bn: "এখন",
+  tl: "ngayon",
+  ca: "ara",
+  vi: "hiện nay",
+  uk: "зараз",
+  tr: "şimdi",
+  th: "ตอนนี้",
+  tg: "ҳозир",
+  sv: "nu",
+  es: "ahora",
+  sl: "zdaj",
+  sk: "teraz",
+  sr: "Сада",
+  ru: "сейчас",
+  ro: "acum",
+  pt: "agora",
+  pl: "teraz",
+  no: "nå",
+  lt: "dabar",
+  lv: "tagad",
+  ko: "지금",
+  ja: "今",
+  it: "adesso",
+  id: "sekarang",
+  he: "עַכשָׁיו",
+  el: "τώρα",
+  de: "jetzt",
+  fr: "maintenant",
+  fi: "nyt",
+  et: "nüüd",
+  eo: "nun",
+  nl: "nu",
+  da: "nu",
+  cs: "Nyní",
+  hr: "sada",
+  "zh-TW": "現在",
+  zh: "现在",
+  bg: "сега",
+  ar: "الآن",
 };
