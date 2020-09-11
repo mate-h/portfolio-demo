@@ -19067,6 +19067,11 @@ p.paragraph::after {
   --color: rgba(0, 0, 0, calc(0.06 * var(--displayScale)));
 }
 
+.app-background > * {
+  z-index: 1;
+  position: relative;
+}
+
 .app-background::before {
   position: fixed;
   width: 100%;
@@ -19082,6 +19087,11 @@ p.paragraph::after {
   will-change: transform;
 }
 
+.app-background-cover > * {
+  position: relative;
+  z-index: 1;
+}
+
 .app-background-cover::before {
   position: absolute;
   border-radius: 0.5rem;
@@ -19092,7 +19102,6 @@ p.paragraph::after {
   left: 0;
   right: 0;
   content: "";
-  z-index: -1;
   background: linear-gradient(to right, rgba(0, 0, 0, 0) 1px, transparent 1px)
       left top / 8px 100% repeat-x,
     linear-gradient(rgba(0, 0, 0, 1) var(--pixel), transparent var(--pixel))
@@ -19111,7 +19120,7 @@ i[tabindex] {
 
 /* Baseline grid */
 
-.app-background::after {
+#root::before {
   /* opacity: 0; */
   clip: unset;
   position: absolute;
@@ -19124,7 +19133,6 @@ i[tabindex] {
   bottom: 0px;
   left: 0px;
   top: 0px;
-  z-index: -1;
   background: linear-gradient(to right, rgba(0, 0, 0, 0) 1px, transparent 1px)
       left top / 8px 100% repeat-x,
     linear-gradient(rgba(0, 0, 0, 0.24) var(--pixel), transparent var(--pixel))
