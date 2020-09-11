@@ -37,6 +37,7 @@ export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
   });
 
   useEffect(() => {
+    // console.log(permissionState, position);
     // waiting for permission query callback
     if (!position) {
       if (permissionState === undefined) return;

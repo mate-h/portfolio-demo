@@ -1,7 +1,11 @@
 import { getLanguageKey } from "./languages";
 
 export const dateFormat = (date: string, language: string) =>
-  new Intl.DateTimeFormat(language).format(new Date(date));
+  new Intl.DateTimeFormat(language, {
+    hour: "numeric",
+    minute: "numeric",
+    weekday: "long",
+  }).format(new Date(date));
 
 export const relativeFormat = (d: any, language: string) => {
   try {
@@ -23,38 +27,63 @@ export const relativeFormat = (d: any, language: string) => {
     if (minutes >= 1) {
       return rtf.format(Math.ceil(-minutes), "minute");
     }
-    return (
-      (now as any)[getLanguageKey(language)].toLowerCase()
-    );
+    return (now as any)[getLanguageKey(language)].toLowerCase();
   } catch (e) {
     return dateFormat(d, language);
   }
 };
 
-export const formatTemperature = (kelvin: number, language: string, unit?: string) => {
-  const formatter = new Intl.NumberFormat(language, {
-    style: "unit",
-    unit: unit || "celsius",
-    maximumFractionDigits: 0,
-    minimumFractionDigits: 0,
-  } as any);
+export const formatTemperature = (
+  kelvin: number,
+  language: string,
+  unit?: string
+) => {
   const c = kelvin - 273.15;
   const f = ((kelvin - 273.15) * 9) / 5 + 32;
-  const unitPart = formatter
-    .formatToParts(c)
-    .find((p) => (p.type as any) === "unit");
-  const s = formatter.format(unit === "fahrenheit" ? f : c);
-  if (unitPart) {
-    const location = s.indexOf(unitPart.value);
+  try {
+    const formatter = new Intl.NumberFormat(language, {
+      style: "unit",
+      unit: unit || "celsius",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    } as any);
 
+    const unitPart = formatter
+      .formatToParts(c)
+      .find((p) => (p.type as any) === "unit");
+    const s = formatter.format(unit === "fahrenheit" ? f : c);
+    if (unitPart) {
+      const location = s.indexOf(unitPart.value);
+
+      return [
+        { value: s.slice(0, location) },
+        { value: unitPart.value, unit: true },
+        { value: s.slice(location + unitPart.value.length) },
+      ].filter((a) => a.value);
+    } else return [{ value: s }];
+  } catch (e) {
+    // fallback implementation
+    const formatter = new Intl.NumberFormat(language, {
+      style: "decimal",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    } as any);
+    const languageKey = getLanguageKey(language);
+    let unitPart = units.en[unit === "fahrenheit" ? "f" : "c"];
+    if (["ar", "hi"].includes(languageKey))
+      unitPart = (units as any)[languageKey][unit === "fahrenheit" ? "f" : "c"];
     return [
-      { value: s.slice(0, location) },
-      { value: unitPart.value, unit: true },
-      { value: s.slice(location + unitPart.value.length) },
-    ].filter((a) => a.value);
-  } else return [{ value: s }];
+      { value: formatter.format(unit === "fahrenheit" ? f : c) },
+      { value: unitPart, unit: true },
+    ];
+  }
 };
 
+const units = {
+  ar: { c: "°م", f: "°ف" },
+  hi: { c: "°से॰", f: "°फ़ेरन" },
+  en: { c: "°C", f: "°F" },
+};
 const now = {
   en: "now",
   eu: "orain",

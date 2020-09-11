@@ -17,7 +17,7 @@ export function CityPicker() {
         <Paragraph className="caption text-white">{t("cityName")}</Paragraph>
       </label>
 
-      <span className="relative button-states button-states-light my-2 sm:my-0 mx-0 sm:mx-4 md:mx-6">
+      <span className="inline-block relative button-states button-states-light my-2 sm:my-0 mx-0 sm:mx-4 md:mx-6">
         <input
           onFocus={(e) => e.target.select()}
           onChange={handler}

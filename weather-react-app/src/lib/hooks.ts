@@ -110,7 +110,9 @@ export function usePosition() {
             setPermissionState(result.state);
           };
         });
-    } catch (e) {}
+    } catch (e) {
+      setPermissionState("prompt");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
