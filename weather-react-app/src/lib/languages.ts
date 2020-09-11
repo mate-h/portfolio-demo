@@ -4,7 +4,6 @@
  */
 export const supported = [
   "af",
-  "al",
   "ar",
   "az",
   "bg",
@@ -42,6 +41,7 @@ export const supported = [
   "sl",
   "es",
   "sr",
+  "sq",
   "th",
   "tr",
   "uk",
@@ -51,12 +51,61 @@ export const supported = [
   "zu",
 ];
 
+const regions = {
+  af: "ZA",
+  ar: "EG",
+  az: "AZ",
+  bg: "BG",
+  ca: "ES",
+  cs: "CZ",
+  da: "DK",
+  de: "DE",
+  el: "GR",
+  en: "US",
+  es: "ES",
+  eu: "ES",
+  fa: "IR",
+  fi: "FI",
+  fr: "FR",
+  gl: "ES",
+  he: "IL",
+  hi: "IN",
+  hr: "HR",
+  hu: "HU",
+  id: "ID",
+  it: "IT",
+  ja: "JP",
+  ko: "KR",
+  lt: "LT",
+  lv: "LV",
+  mk: "MK",
+  nb: "NO",
+  nl: "NL",
+  pl: "PL",
+  "pt-BR": "BR",
+  "pt-PT": "PT",
+  ro: "RO",
+  ru: "RU",
+  sk: "SK",
+  sl: "SI",
+  sq: "AL",
+  sr: "RS",
+  sv: "SE",
+  th: "TH",
+  tr: "TR",
+  uk: "UA",
+  vi: "VN",
+  "zh-CN": "CN",
+  "zh-TW": "TW",
+  zu: "ZA",
+} as any;
+
 /** Return the language tag only from a locale tag */
 function getLocaleLanguage(bcpTag: string) {
   try {
     return new (Intl as any).Locale(bcpTag).language;
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 
   return bcpTag.split("-")[0];
@@ -67,10 +116,14 @@ function getLocaleRegion(bcpTag: string) {
   try {
     return new (Intl as any).Locale(bcpTag).maximize().region;
   } catch (e) {
-    console.log(e);
+    // console.log(e);
   }
 
-  return bcpTag.split("-").find((a) => a.length === 2 && a.toUpperCase() === a);
+  const found = bcpTag
+    .split("-")
+    .find((a) => a.length === 2 && a.toUpperCase() === a);
+  if (found) return found;
+  return regions[bcpTag];
 }
 
 /** Returns lang parameter used for the OpenWeatherMap API */
@@ -86,6 +139,7 @@ export function getLangParam(bcpTag: string) {
   if (language === "ko") return "kr";
   if (language === "lv") return "la";
   if (language === "nb") return "no";
+  if (language === "sq") return "al";
 
   // fallback to english
   if (!supported.includes(language)) return "en";

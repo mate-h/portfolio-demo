@@ -36,25 +36,31 @@ function App() {
               </Paragraph>
             </div>
 
-            <Paragraph bottom={8} className="overline text-white">
-              Current location{" "}
-              <i
-                tabIndex={-1}
-                title="Based on your location permission preferences, and your public IP address."
-                aria-label="Based on your location permission preferences, and your public IP address."
-                className="text-sm cursor-pointer"
-              >
-                {icon("info.circle")}
-              </i>
-            </Paragraph>
-            <div className={gridComponent}>
-              <WeatherCard />
+            <div className="my-4 md:my-6">
+              <Paragraph bottom={8} className="overline text-white">
+                Current location{" "}
+                <i
+                  tabIndex={-1}
+                  title="Based on your location permission preferences, and your public IP address."
+                  aria-label="Based on your location permission preferences, and your public IP address."
+                  className="text-sm cursor-pointer"
+                >
+                  {icon("info.circle")}
+                </i>
+              </Paragraph>
+              <div className={gridComponent}>
+                <WeatherCard />
+              </div>
             </div>
-            <Paragraph bottom={8} className="overline text-white">
-              Your cities
-            </Paragraph>
-            <div className={gridComponent}>
-              <CityPicker />
+            <CityPicker />
+            <div className="my-4 md:my-6">
+              <Paragraph bottom={8} className="overline text-white">
+                Your cities
+              </Paragraph>
+
+              <div className={gridComponent}>
+                <WeatherCard />
+              </div>
             </div>
           </main>
         </CurrentWeather.Provider>

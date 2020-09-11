@@ -22,20 +22,20 @@ export function LanguagePicker() {
     });
   }
   return (
-    <>
-      <label htmlFor="cars">
+    <div className="sm:flex sm:flex-wrap">
+      <label className="cursor-pointer" htmlFor="language">
         <Paragraph bottom={8} className="caption text-white">
           Language
         </Paragraph>
       </label>
 
-      <span className="dropdown dropdown-right-3 sm:dropdown-right-1 relative inline-block">
+      <span className="dropdown dropdown-right-3 sm:dropdown-right-1 relative mx-0 sm:mx-4 md:mx-6 inline-block">
         <select
           onChange={handler}
           value={value}
           className="h-10 sm:h-6 pr-10 rounded px-4 sm:px-2 sm:pr-8 appearance-none outline-none focus:shadow-outline"
-          name="cars"
-          id="cars"
+          name="language"
+          id="language"
         >
           {supported
             .map((l) => [l, nativeNames[getLanguageKey(l)], getEmoji(l)])
@@ -46,6 +46,6 @@ export function LanguagePicker() {
             ))}
         </select>
       </span>
-    </>
+    </div>
   );
 }

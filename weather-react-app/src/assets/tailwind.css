@@ -35,6 +35,26 @@
   --text-sm: 14;
   --text-xs: 12;
   --text-2xs: 10;
+
+  /** Material Design states */
+  --state-hover-light: 0.04;
+  --state-hover-dark: 0.08;
+  --state-hover-image: 0.12;
+  --state-focus-light: 0.12;
+  --state-focus-dark: 0.24;
+  --state-focus-image: 0.36;
+  --state-selected-light: 0.08;
+  --state-selected-dark: 0.16;
+  --state-selected-image: 0.24;
+  --state-activated-light: 0.12;
+  --state-activated-dark: 0.24;
+  --state-activated-image: 0.36;
+  --state-pressed-light: 0.16;
+  --state-pressed-dark: 0.32;
+  --state-pressed-image: 0.48;
+  --state-dragged-light: 0.08;
+  --state-dragged-dark: 0.16;
+  --state-dragged-image: 0.36;
 }
 
 @supports (font-variation-settings: normal) {
@@ -309,4 +329,35 @@ i[tabindex] {
   bottom: 0;
   display: flex;
   align-items: center;
+}
+.dropdown:focus::after {
+  @apply text-primary;
+}
+
+.dropdown > input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+.button-states-dark::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0);
+  pointer-events: none;
+  transition: background-color linear 70ms;
+}
+
+.button-states-dark:hover::before {
+  background-color: rgba(255, 255, 255, var(--state-hover-dark));
+}
+
+.button-states-dark:focus::before {
+  background-color: rgba(255, 255, 255, var(--state-focus-dark));
+}
+
+.button-states-dark:active::before {
+  background-color: rgba(255, 255, 255, var(--state-pressed-dark));
 }
