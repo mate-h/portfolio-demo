@@ -1,10 +1,10 @@
 import React from "react";
 import { Paragraph } from "./Paragraph";
 import { icon } from "../lib/config";
-
-const decoder = new TextDecoder();
+import { useTranslation } from "../lib/translations";
 
 export function CityPicker() {
+  const { t } = useTranslation();
   function handler(e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.value !== "") {
       // TODO: show dropdown list somehow
@@ -14,7 +14,7 @@ export function CityPicker() {
   return (
     <div className="inline-block sm:flex sm:flex-wrap">
       <label className="cursor-pointer" htmlFor="city">
-        <Paragraph className="caption text-white">Enter a city name</Paragraph>
+        <Paragraph className="caption text-white">{t('cityName')}</Paragraph>
       </label>
 
       <input
@@ -30,7 +30,7 @@ export function CityPicker() {
         <div className="h-10 sm:h-6 overflow-hidden">
           <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-white">
             <i>{icon("plus")}</i>
-            Add city
+            {` ${t('addCity')}`}
           </Paragraph>
         </div>
       </button>

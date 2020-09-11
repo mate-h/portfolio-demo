@@ -32,7 +32,7 @@ export const supported = [
   "nb",
   "nl",
   "pl",
-  "pt-PT",
+  "pt",
   "pt-BR",
   "ro",
   "ru",
@@ -82,6 +82,7 @@ const regions = {
   nb: "NO",
   nl: "NL",
   pl: "PL",
+  pt: "PT",
   "pt-BR": "BR",
   "pt-PT": "PT",
   ro: "RO",
@@ -113,17 +114,20 @@ function getLocaleLanguage(bcpTag: string) {
 
 /** Return the region tag only from a locale tag */
 function getLocaleRegion(bcpTag: string) {
+  let found = regions[bcpTag];
+  if (found) return found;
+
   try {
     return new (Intl as any).Locale(bcpTag).maximize().region;
   } catch (e) {
     // console.log(e);
   }
 
-  const found = bcpTag
+  found = bcpTag
     .split("-")
     .find((a) => a.length === 2 && a.toUpperCase() === a);
   if (found) return found;
-  return regions[bcpTag];
+  return null;
 }
 
 /** Returns lang parameter used for the OpenWeatherMap API */
@@ -139,10 +143,13 @@ export function getLangParam(bcpTag: string) {
   if (language === "ko") return "kr";
   if (language === "lv") return "la";
   if (language === "nb") return "no";
-  if (language === "sq") return "al";
+  // if (language === "sq") return "al";
 
   // fallback to english
-  if (!supported.includes(language)) return "en";
+  if (!supported.includes(language)) {
+    console.log("unsupported", language);
+    return "en";
+  }
   return language;
 }
 
@@ -208,7 +215,6 @@ export const nativeNames: {
   pl: "Polski",
   ps: "پښتو",
   pt: "Português",
-  "pt-BR": "Português (BR)",
   ro: "Română",
   ru: "Русский",
   sd: "سنڌي",
@@ -240,9 +246,6 @@ export function getLanguageKey(bcpTag: string) {
   const language = getLocaleLanguage(bcpTag);
   if (["zh-Hant", "zh-Hant-TW", "zh-TW"].includes(bcpTag)) {
     return "zh-TW";
-  }
-  if (["pt-BR"].includes(bcpTag)) {
-    return "pt-BR";
   }
   return language;
 }

@@ -1,9 +1,9 @@
-const language = navigator.language;
+import { getLanguageKey } from "./languages";
 
-export const dateFormat = (date: string) =>
+export const dateFormat = (date: string, language: string) =>
   new Intl.DateTimeFormat(language).format(new Date(date));
 
-export const relativeFormat = (d: any) => {
+export const relativeFormat = (d: any, language: string) => {
   try {
     const diff = new Date().getTime() - new Date(d).getTime();
     const days = diff / (1000 * 3600 * 24);
@@ -24,15 +24,14 @@ export const relativeFormat = (d: any) => {
       return rtf.format(Math.ceil(-minutes), "minute");
     }
     return (
-      (now as any)[new (Intl as any).Locale(language).minimize().toString()] ||
-      (now as any)[new (Intl as any).Locale(language).language]
+      (now as any)[getLanguageKey(language)].toLowerCase()
     );
   } catch (e) {
-    return dateFormat(d);
+    return dateFormat(d, language);
   }
 };
 
-export const formatTemperature = (kelvin: number, unit?: string) => {
+export const formatTemperature = (kelvin: number, language: string, unit?: string) => {
   const formatter = new Intl.NumberFormat(language, {
     style: "unit",
     unit: unit || "celsius",

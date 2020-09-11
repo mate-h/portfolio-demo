@@ -2,7 +2,7 @@ import React from "react";
 import { Paragraph } from "../Paragraph";
 import { icon } from "../../lib/config";
 import { useContainer } from "unstated-next";
-import { CurrentWeather, Settings } from "../../App";
+import { CurrentWeather, Settings } from "../..";
 import { relativeFormat, formatTemperature } from "../../lib/format";
 import icons from "../../lib/openweathermap/icons";
 
@@ -12,13 +12,14 @@ export function WeatherCard({ city }: { city?: string }) {
   if (loading || !data) return null;
   const formatParts = formatTemperature(
     data.main.temp,
+    settings.locale,
     settings.imperial ? "fahrenheit" : "celsius"
   );
   return (
     <div className="app-background-cover relative bg-black bg-opacity-72 text-white p-4 md:p-6 rounded-lg">
       <div className="hairline-border-outside" />
       <Paragraph className="caption text-opacity-72 text-white">
-        {relativeFormat(data.dt * 1000)}
+        {relativeFormat(data.dt * 1000, settings.locale)}
       </Paragraph>
       <Paragraph className="headline6">
         {data.name}, {data.sys.country}{" "}

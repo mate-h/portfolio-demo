@@ -7,7 +7,8 @@ import {
   getEmoji,
 } from "../lib/languages";
 import { useContainer } from "unstated-next";
-import { Settings } from "../App";
+import { Settings } from "..";
+import { t } from "../lib/translations";
 export function LanguagePicker() {
   const {
     settings: { locale },
@@ -25,7 +26,7 @@ export function LanguagePicker() {
     <div className="sm:flex sm:flex-wrap">
       <label className="cursor-pointer" htmlFor="language">
         <Paragraph bottom={8} className="caption text-white">
-          Language
+          {t("language", locale)}
         </Paragraph>
       </label>
 

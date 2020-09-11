@@ -9,7 +9,7 @@ import {
 import { useEffect } from "react";
 import { useFetchGeolocation } from "../ip-api/api";
 import { useContainer } from "unstated-next";
-import { CurrentPosition, Settings } from "../../App";
+import { CurrentPosition, Settings } from "../..";
 import { getLangParam } from "../languages";
 
 const defaultParams: GetCurrentParams = {
@@ -68,7 +68,7 @@ export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loading, data, permissionState, position]);
+  }, [loading, data, permissionState, position, defaultParams.lang]);
 
   return fetchHook;
 };

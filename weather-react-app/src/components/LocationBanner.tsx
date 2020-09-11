@@ -2,7 +2,8 @@ import React from "react";
 import { Paragraph } from "./Paragraph";
 import { usePersistedState } from "../lib/hooks";
 import { useContainer } from "unstated-next";
-import { CurrentPosition } from "../App";
+import { CurrentPosition } from "..";
+import { useTranslation } from "../lib/translations";
 
 export function LocationBanner() {
   const [visible, setVisible] = usePersistedState(
@@ -10,6 +11,7 @@ export function LocationBanner() {
     true
   );
   const { permissionState, setPosition } = useContainer(CurrentPosition);
+  const { t } = useTranslation();
   function handler() {
     function success(p: Position) {
       // TODO: display snackbar "Location updated" with new, more accurate location
@@ -30,10 +32,9 @@ export function LocationBanner() {
     return (
       <div>
         <Paragraph className="body2">
-          For more accurate results, consider allowing location access in your
-          browser's address bar
+          {t('locationBanner.denied')}
         </Paragraph>
-        <button onClick={handlerDismiss}>Dismiss</button>
+        <button onClick={handlerDismiss}>{t('locationBanner.dismiss')}</button>
       </div>
     );
 
@@ -43,10 +44,10 @@ export function LocationBanner() {
   return (
     <div>
       <Paragraph className="body2">
-        Allow location access for more accurate results
+        {t('locationBanner.prompt')}
       </Paragraph>
-      <button onClick={handlerDismiss}>Dismiss</button>
-      <button onClick={handler}>Allow</button>
+      <button onClick={handlerDismiss}>{t('locationBanner.dismiss')}</button>
+      <button onClick={handler}>{t('locationBanner.allow')}</button>
     </div>
   );
 }
