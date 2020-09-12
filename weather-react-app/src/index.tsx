@@ -4,9 +4,9 @@ import "./assets/main.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { createContainer } from "unstated-next";
-import { useCurrentWeather, usePosition, useSettings } from "./lib/hooks";
+import { useLocationWeather, usePosition, useSettings } from "./lib/hooks";
 
-export const CurrentWeather = createContainer(useCurrentWeather);
+export const CurrentWeather = createContainer(useLocationWeather);
 
 export const CurrentPosition = createContainer(usePosition);
 

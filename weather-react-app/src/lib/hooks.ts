@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
-import { useFetchCurrent } from "./openweathermap/api";
+import {
+  useFetchCurrentWeather,
+  useFetchLocationWeather,
+} from "./openweathermap/api";
 
 export function usePersistedState<T>(key: string, defaultValue?: any) {
   const [state, setState] = useState<T>(() => {
@@ -32,14 +35,15 @@ export function usePersistedState<T>(key: string, defaultValue?: any) {
   ];
 }
 
-export function useCurrentWeather() {
-  return useFetchCurrent({}, {});
+export function useLocationWeather() {
+  return useFetchLocationWeather({}, {});
 }
 
 export function useSettings() {
   const [settings, setSettings] = usePersistedState("app.settings", {
     imperial: false,
     locale: navigator.language,
+    cities: [],
   });
 
   function updateSettings(newSettings: any) {
@@ -50,7 +54,11 @@ export function useSettings() {
   }
 
   return {
-    settings: settings as { imperial: boolean; locale: string },
+    settings: settings as {
+      imperial: boolean;
+      locale: string;
+      cities: number[];
+    },
     updateSettings,
   };
 }

@@ -15,6 +15,10 @@ export type StatefulHook<T extends (...args: any) => any> = (
   ...params: Parameters<T>
 ) => UseFetch<ReturnType<T>>;
 
+export type StatelessHook<T extends (...args: any) => any> = (
+  options?: IncomingOptions
+) => UseFetch<ReturnType<T>> & { route: (...params: Parameters<T>) => string };
+
 // expiration is 24 hours by default
 export const defaultOptions: IncomingOptions = {
   persist: true,

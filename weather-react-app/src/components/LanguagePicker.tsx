@@ -34,7 +34,7 @@ export function LanguagePicker({ className }: { className?: string }) {
         <select
           onChange={handler}
           value={value}
-          className="transition-shadow duration-150 shadow-hairline shadow-hairline-light rounded h-10 sm:h-6 pr-10 px-4 sm:px-2 sm:pr-8 appearance-none outline-none focus:shadow-outline"
+          className="bg-white transition-shadow duration-150 shadow-hairline shadow-hairline-light rounded h-10 sm:h-6 pr-10 px-4 sm:px-2 sm:pr-8 appearance-none outline-none focus:shadow-outline"
           name="language"
           id="language"
         >

@@ -210,7 +210,7 @@ p.paragraph::after {
   --color: rgba(0, 0, 0, calc(0.06 * var(--displayScale)));
 }
 
-.app-background > * {
+.app-background > *:not(.exclude) {
   z-index: 1;
   position: relative;
 }
@@ -229,7 +229,7 @@ p.paragraph::after {
   will-change: transform;
 }
 
-.app-background-cover > * {
+.app-background-cover > *:not(.exclude) {
   position: relative;
   z-index: 1;
 }
@@ -260,7 +260,7 @@ i[tabindex] {
 }
 
 /* Baseline grid */
-#root::before {
+.baseliner {
   /* opacity: 0; */
   clip: unset;
   position: absolute;
@@ -269,10 +269,11 @@ i[tabindex] {
   content: "";
   display: block;
   pointer-events: none;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  top: 0px;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   background: linear-gradient(to right, rgba(0, 0, 0, 0) 1px, transparent 1px)
       left top / 8px 100% repeat-x,
     linear-gradient(rgba(0, 0, 0, 0.24) var(--pixel), transparent var(--pixel))
@@ -384,11 +385,8 @@ i[tabindex] {
   --states-bg: rgba(0, 0, 0, var(--state-pressed-light));
 }
 
-.full-width {
+.full-width-sticky {
   width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
   margin-left: -50vw;
   margin-right: -50vw;
 }

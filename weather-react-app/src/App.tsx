@@ -1,11 +1,13 @@
 import React from "react";
 import { Paragraph } from "./components/Paragraph";
 import { LocationBanner } from "./components/LocationBanner";
-import { WeatherCard } from "./components/WeatherCard";
+import { WeatherCityCard, WeatherLocationCard } from "./components/WeatherCard";
 import { icon } from "./lib/config";
 import { LanguagePicker } from "./components/LanguagePicker";
 import { CityPicker } from "./components/CityPicker";
 import { useTranslation } from "./lib/translations";
+import { useContainer } from "unstated-next";
+import { Settings } from ".";
 
 function App() {
   const backgroundStyle = {
@@ -14,11 +16,15 @@ function App() {
   const gridComponent =
     "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6";
   const { t } = useTranslation();
+  const {
+    settings: { cities },
+  } = useContainer(Settings);
   return (
     <main
       style={backgroundStyle as any}
-      className="app-background container mx-auto px-4 md:px-6"
+      className="relative app-background container mx-auto px-4 md:px-6"
     >
+      <div className="baseliner" />
       <LocationBanner />
       <LanguagePicker className="my-4 md:my-6" />
       <Paragraph
@@ -42,7 +48,7 @@ function App() {
           </i>
         </Paragraph>
         <div className={gridComponent}>
-          <WeatherCard />
+          <WeatherLocationCard />
         </div>
       </div>
       <CityPicker />
@@ -52,7 +58,9 @@ function App() {
         </Paragraph>
 
         <div className={gridComponent}>
-          <WeatherCard />
+          {cities.map((id) => (
+            <WeatherCityCard key={id} cityId={id} />
+          ))}
         </div>
       </div>
     </main>

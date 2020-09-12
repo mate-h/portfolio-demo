@@ -14,7 +14,7 @@ declare module "OpenWeatherMap" {
     /** API key */
     appid: string;
     /** It's recommended to call the API by city ID to get unambiguous result for your city. */
-    id: string;
+    id: number;
     /** lat, lon coordinates of the location of your interest */
     lat: number;
     /** lat, lon coordinates of the location of your interest */
@@ -107,6 +107,8 @@ Translation is applied for the city name and description fields. */
     name: string;
     cod: number;
   };
+
+  export type ErrorResponse = { cod: string; message: string };
 
   export interface API {
     /**

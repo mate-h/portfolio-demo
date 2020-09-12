@@ -5,6 +5,7 @@ import {
   appid,
   StatefulHook,
   weatherUpdateOptions,
+  StatelessHook,
 } from "../config";
 import { useEffect } from "react";
 import { useFetchGeolocation } from "../ip-api/api";
@@ -16,7 +17,56 @@ const defaultParams: GetCurrentParams = {
   appid,
 };
 
-export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
+export const route = (o: GetCurrentParams) =>
+  `?${new URLSearchParams(o as any)}`;
+
+export const useFetchCurrentWeather: StatefulHook<API["getCurrent"]> = (
+  options,
+  params
+) => {
+  const {
+    settings: { locale },
+  } = useContainer(Settings);
+
+  defaultParams.lang = getLangParam(locale);
+  const url = new URL(getCurrentUrl);
+  url.search = new URLSearchParams({
+    ...defaultParams,
+    ...params,
+  } as any).toString();
+  return useFetch<GetCurrentResponse>(
+    url.toString(),
+    { ...weatherUpdateOptions, ...options },
+    [
+      ...Object.values(
+        {
+          ...defaultParams,
+          ...params,
+        } || {}
+      ),
+    ]
+  );
+};
+export const useFetchQueryWeather: StatelessHook<API["getCurrent"]> = (
+  options
+) => {
+  const {
+    settings: { locale },
+  } = useContainer(Settings);
+
+  defaultParams.lang = getLangParam(locale);
+  const url = new URL(getCurrentUrl);
+  const fetchHook = useFetch<GetCurrentResponse>(url.toString(), {
+    ...weatherUpdateOptions,
+    ...options,
+  });
+  return {
+    ...fetchHook,
+    route: (params) => route({ ...defaultParams, ...params }),
+  };
+};
+
+export const useFetchLocationWeather: StatefulHook<API["getCurrent"]> = (
   options,
   params
 ) => {
@@ -43,8 +93,6 @@ export const useFetchCurrent: StatefulHook<API["getCurrent"]> = (
       if (permissionState === undefined) return;
       if (permissionState === "granted" && position === undefined) return;
     }
-
-    const route = (o: GetCurrentParams) => `?${new URLSearchParams(o as any)}`;
 
     // use latitude and longitude if position is available
     if (position && permissionState !== "denied") {
