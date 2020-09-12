@@ -22,7 +22,9 @@ export function CityPicker() {
       value.current = e.target.value;
     }
   }
-  function clickHandler() {
+  function clickHandler(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+
     if (value.current) {
       get(route({ q: value.current })).then(
         (value: GetCurrentResponse | ErrorResponse) => {
@@ -44,7 +46,7 @@ export function CityPicker() {
   }
 
   return (
-    <div className="inline-block sm:flex sm:flex-wrap">
+    <form onSubmit={clickHandler} className="inline-block sm:flex sm:flex-wrap">
       <label className="cursor-pointer" htmlFor="city">
         <Paragraph className="caption text-white">{t("cityName")}</Paragraph>
       </label>
@@ -61,7 +63,8 @@ export function CityPicker() {
       </span>
 
       <button
-        onClick={clickHandler}
+        type="submit"
+        // onClick={clickHandler}
         className="transition-shadow duration-150 shadow-hairline shadow-hairline-light block h-10 sm:h-6 button-states button-states-dark relative overflow-hidden bg-primary rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
       >
         <div className="h-10 sm:h-6 overflow-hidden">
@@ -76,6 +79,6 @@ export function CityPicker() {
           No results
         </Paragraph>
       )}
-    </div>
+    </form>
   );
 }

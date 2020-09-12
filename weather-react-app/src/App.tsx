@@ -52,17 +52,19 @@ function App() {
         </div>
       </div>
       <CityPicker />
-      <div className="my-4 md:my-6">
-        <Paragraph bottom={8} className="overline text-white">
-          {t("yourCities")}
-        </Paragraph>
+      {cities.length !== 0 && (
+        <div className="my-4 md:my-6">
+          <Paragraph bottom={8} className="overline text-white">
+            {t("yourCities")}
+          </Paragraph>
 
-        <div className={gridComponent}>
-          {cities.map((id) => (
-            <WeatherCityCard key={id} cityId={id} />
-          ))}
+          <div className={gridComponent}>
+            {cities.map((id) => (
+              <WeatherCityCard key={id} cityId={id} />
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </main>
   );
 }
