@@ -11,6 +11,11 @@ export const ipApiRoot = process.env.REACT_APP_IP_API_ROOT;
 export const getGeolocationUrl = (query?: string) =>
   query ? `${ipApiRoot}/json/${query}` : `${ipApiRoot}/json`;
 
+// Google APIs config
+export const googleApiKey = process.env.REACT_APP_GOOGLE_API_KEY;
+export const geolocationApiRoot = `${process.env.REACT_APP_GOOGLE_APIS}/geolocation/v1/geolocate`;
+export const placesAutocompleteApiUrl = `${process.env.REACT_APP_GOOGLE_MAPS}/maps/api/place/autocomplete/json`;
+
 export type StatefulHook<T extends (...args: any) => any> = (
   options?: IncomingOptions,
   ...params: Parameters<T>
@@ -30,6 +35,10 @@ export const weatherUpdateOptions: IncomingOptions = {
   ...defaultOptions,
   cacheLife: 20 * 60 * 1000,
 };
+
+// autocomplete debounce config
+export const debounceTime = 250;
+export const debounceMaxWait = 1000;
 
 const lookup = {
   "person.crop.circle.fill": [56256, 56942],

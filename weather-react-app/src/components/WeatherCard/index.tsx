@@ -48,8 +48,7 @@ function WeatherCardBase({
 }) {
   const { settings, updateSettings } = useContainer(Settings);
   // TODO: loading skeleton
-  if (loading || !data || !data.main) {
-    if (data) console.log(data);
+  if (!data || !data.main) {
     return null;
   }
 

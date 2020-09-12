@@ -320,6 +320,9 @@ i[tabindex] {
     right: 0.75rem;
   }
 }
+.dropdown.up::after {
+  content: "\100187";
+}
 .dropdown::after {
   content: "\100188";
   font-family: "SF Symbols";
@@ -336,7 +339,7 @@ i[tabindex] {
   @apply text-primary;
 }
 
-.dropdown > input::-webkit-calendar-picker-indicator {
+input::-webkit-calendar-picker-indicator {
   display: none;
 }
 

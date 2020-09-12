@@ -30,11 +30,11 @@ export function LanguagePicker({ className }: { className?: string }) {
         </Paragraph>
       </label>
 
-      <span className="button-states button-states-light dropdown dropdown-right-3 sm:dropdown-right-1 relative mx-0 sm:mx-4 md:mx-6 inline-block">
+      <span className="button-states button-states-light dropdown dropdown-right-3 sm:dropdown-right-1 relative h-10 sm:h-6 mx-0 sm:mx-4 md:mx-6 inline-block">
         <select
           onChange={handler}
           value={value}
-          className="bg-white transition-shadow duration-150 shadow-hairline shadow-hairline-light rounded h-10 sm:h-6 pr-10 px-4 sm:px-2 sm:pr-8 appearance-none outline-none focus:shadow-outline"
+          className="body1 sm:body2 bg-white transition-shadow duration-150 shadow-hairline shadow-hairline-light rounded h-10 sm:h-6 pr-10 px-4 sm:px-2 sm:pr-8 appearance-none outline-none focus:shadow-outline"
           name="language"
           id="language"
         >
