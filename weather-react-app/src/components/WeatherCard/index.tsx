@@ -80,7 +80,7 @@ function WeatherCardBase({
           {icon(icons[data.weather[0].icon])}
         </i>
         <div className="px-4 md:px-6">
-          <div className="inline-block transform translate-y-2 select-none rounded overflow-hidden button-states button-states-dark relative cursor-pointer">
+          <div className="transform translate-y-2 select-none rounded overflow-hidden button-states button-states-dark relative cursor-pointer">
             <Paragraph
               onClick={() => updateSettings({ imperial: !settings.imperial })}
               className="headline3 transform -translate-y-2"
