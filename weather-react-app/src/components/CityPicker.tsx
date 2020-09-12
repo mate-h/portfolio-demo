@@ -82,7 +82,7 @@ export function CityPicker() {
   }
 
   function blurHandler(e: React.FocusEvent<HTMLInputElement>) {
-    // setVisible(false);
+    setVisible(false);
   }
 
   function selectHandler(
