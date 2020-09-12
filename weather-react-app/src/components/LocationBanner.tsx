@@ -21,6 +21,7 @@ export function LocationBanner({ className }: { className?: string }) {
     function error(e: PositionError) {
       // TODO: display snackbar with error
       console.log(e);
+      alert(e.message);
     }
     navigator.geolocation.getCurrentPosition(success, error, {});
   }

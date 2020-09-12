@@ -48,7 +48,10 @@ function WeatherCardBase({
 }) {
   const { settings, updateSettings } = useContainer(Settings);
   // TODO: loading skeleton
-  if (loading || !data) return null;
+  if (loading || !data || !data.main) {
+    if (data) console.log(data);
+    return null;
+  }
 
   const formatParts = formatTemperature(
     data.main.temp,
