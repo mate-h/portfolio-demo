@@ -34,6 +34,6 @@ This repository hosts demos for assigments in the job interviewing process.
 
 ### Table of Contents
 
-- [Architecture](design-documentation/architecture.md)
-- [Process](design-documentation/process.md)
-- [User journeys](design-documentation/user-journeys.md)
+[Architecture](design-documentation/architecture.md)  
+[Process](design-documentation/process.md)  
+[User journeys](design-documentation/user-journeys.md)
