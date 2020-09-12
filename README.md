@@ -10,7 +10,7 @@ This repository hosts demos for assigments in the job interviewing process.
 >
 > Create an application that downloads the current weather forecast from the following service and displays it in a browser: https://openweathermap.org/api. The application should be written in TypeScript using the ReactJS framework, and your completed application should be uploaded to GitHub and the repo link sent to us.
 
-(Learn more)[weather-react-app/README.md]
+[Learn more](weather-react-app/README.md)
 
 # Jobs React App
 
@@ -24,7 +24,7 @@ This repository hosts demos for assigments in the job interviewing process.
 > - The app should have at least 2 pages. The homepage with a search bar and a list of jobs and a page showing the detailed job's description when the user clicks on a job in the list.
 > - Uses React Hooks API, Material-UI (https://material-ui.com/) and React Router (https://reactrouter.com/web/guides/quick-start)
 
-(Learn more)[jobs-react-app/README.md]
+[Learn more](jobs-react-app/README.md)
 
 # Design Documentation
 
@@ -34,6 +34,6 @@ This repository hosts demos for assigments in the job interviewing process.
 
 ### Table of Contents
 
-- (Architecture)[design-documentation/architecture.md]
-- (Process)[design-documentation/process.md]
-- (User journeys)[design-documentation/user-journeys.md]
+- [Architecture](design-documentation/architecture.md)
+- [Process](design-documentation/process.md)
+- [User journeys](design-documentation/user-journeys.md)
