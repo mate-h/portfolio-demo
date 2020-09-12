@@ -6,6 +6,7 @@ export const apiRoot = process.env.REACT_APP_API_ROOT;
 export const getCurrentUrl = `${apiRoot}/data/2.5/weather`;
 
 // IP API config
+export const ipifyApiRoot = process.env.REACT_APP_IPIFY_API_ROOT;
 export const ipApiRoot = process.env.REACT_APP_IP_API_ROOT;
 export const getGeolocationUrl = (query?: string) =>
   query ? `${ipApiRoot}/json/${query}` : `${ipApiRoot}/json`;

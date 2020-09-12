@@ -11,7 +11,7 @@ import { Settings } from ".";
 
 function App() {
   const backgroundStyle = {
-    "--src": "url(background/weather-bg-1.jpg)",
+    "--src": `url(${process.env.PUBLIC_URL}/background/weather-bg-1.jpg)`,
   };
   const gridComponent =
     "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6";
