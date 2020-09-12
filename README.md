@@ -32,7 +32,7 @@ This repository hosts demos for assigments in the job interviewing process.
 >
 > Design a calendar invitation system. The admin can invite a user to an event and gather their feedback (example: attending, comments) Define the technical architecture, user scenario, security risk, scope...
 
-### Table of Contents
+**Table of Contents**
 
 [Architecture](design-documentation/architecture.md)  
 [Process](design-documentation/process.md)  
