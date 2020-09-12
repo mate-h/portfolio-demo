@@ -30,7 +30,7 @@ export function LocationBanner({ className }: { className?: string }) {
   }
   if (!visible) return null;
   const bannerComponent =
-    "full-width-sticky left-0 exclude z-20 clearfix sticky top-0 bg-white sm:flex p-2 md:p-4";
+    "shadow-hairline shadow-hairline-light full-width-sticky left-0 exclude z-20 clearfix sticky top-0 bg-white sm:flex p-2 md:p-4";
   if (permissionState === "denied")
     return (
       <div className={[bannerComponent, className].join(" ")}>

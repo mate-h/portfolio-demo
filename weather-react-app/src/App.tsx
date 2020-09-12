@@ -24,7 +24,10 @@ function App() {
       style={backgroundStyle as any}
       className="relative app-background container mx-auto px-4 md:px-6"
     >
-      <div className="baseliner" />
+      <div
+        style={{ top: 0, bottom: 0 }}
+        className="baseliner exclude -my-4 md:-my-6"
+      />
       <LocationBanner />
       <LanguagePicker className="my-4 md:my-6" />
       <Paragraph
