@@ -17,6 +17,7 @@ export function CityPicker() {
   const { get, route } = useFetchQueryWeather();
   const [noResults, setNoResults] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [hold, setHold] = useState(false);
   const [autocomplete, setAutocomplete] = useState<
     PlacesAutocompleteResponse
   >();
@@ -82,7 +83,31 @@ export function CityPicker() {
   }
 
   function blurHandler(e: React.FocusEvent<HTMLInputElement>) {
+    if (!hold) setVisible(false);
+    console.log("onBlur");
+  }
+
+  function holdCancelHandler() {
+    console.log("window.onPointerUp");
+    setHold(false);
     setVisible(false);
+    if (!!window.PointerEvent)
+      window.removeEventListener("pointerup", holdCancelHandler);
+    else {
+      window.removeEventListener("mouseup", holdCancelHandler);
+      window.removeEventListener("touchend", holdCancelHandler);
+    }
+  }
+
+  function holdHandler() {
+    setHold(true);
+    console.log("onPointerDown");
+    if (!!window.PointerEvent)
+      window.addEventListener("pointerup", holdCancelHandler);
+    else {
+      window.addEventListener("mouseup", holdCancelHandler);
+      window.addEventListener("touchend", holdCancelHandler);
+    }
   }
 
   function selectHandler(
@@ -90,8 +115,10 @@ export function CityPicker() {
   ) {
     if (inputRef) (inputRef as any).current.value = prediction.description;
     value.current = prediction.description;
+    setHold(false);
     setVisible(false);
     setAutocomplete(undefined);
+    console.log("onClick");
   }
 
   const autocompleteOpen =
@@ -125,10 +152,21 @@ export function CityPicker() {
           autoComplete="off"
         />
         {autocompleteOpen && (
-          <ul className="py-4 sm:py-2 absolute z-30 mt-10 sm:mt-6 top-0 left-0 right-0 bg-white rounded-b shadow-hairline shadow-hairline-light">
+          <ul
+            onPointerDown={holdHandler}
+            onMouseDown={!window.PointerEvent ? holdHandler : () => {}}
+            onTouchStart={!window.PointerEvent ? holdHandler : () => {}}
+            className="py-4 sm:py-2 absolute z-30 mt-10 sm:mt-6 top-0 left-0 right-0 bg-white rounded-b shadow-hairline shadow-hairline-light"
+          >
             {autocomplete?.predictions.map((p) => (
               <li
-                onClick={() => selectHandler(p)}
+                onPointerUp={() => selectHandler(p)}
+                onMouseUp={
+                  !window.PointerEvent ? () => selectHandler(p) : () => {}
+                }
+                onTouchEnd={
+                  !window.PointerEvent ? () => selectHandler(p) : () => {}
+                }
                 className="h-10 sm:h-auto px-4 sm:px-2 cursor-pointer overflow-hidden relative button-states button-states-light"
                 key={p.place_id}
               >
