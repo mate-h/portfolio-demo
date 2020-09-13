@@ -7,6 +7,7 @@ import { relativeFormat, formatTemperature } from "../../lib/format";
 import icons from "../../lib/openweathermap/icons";
 import { useFetchCurrentWeather } from "../../lib/openweathermap/api";
 import { GetCurrentResponse } from "OpenWeatherMap";
+import { t } from "../../lib/translations";
 
 export function WeatherLocationCard() {
   let { loading, data } = useContainer(CurrentWeather);
@@ -17,13 +18,15 @@ export function WeatherLocationCard() {
 export function WeatherCityCard({ cityId }: { cityId: number }) {
   let { loading, data } = useFetchCurrentWeather({}, { id: cityId });
   const {
-    settings: { cities },
+    settings: { cities, locale },
     updateSettings,
   } = useContainer(Settings);
   function deleteHandler() {
-    updateSettings({
-      cities: cities.filter((id) => id !== cityId),
-    });
+    if (window.confirm(t("confirmDelete", locale))) {
+      updateSettings({
+        cities: cities.filter((id) => id !== cityId),
+      });
+    }
   }
   return (
     <WeatherCardBase

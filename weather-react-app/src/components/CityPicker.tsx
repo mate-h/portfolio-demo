@@ -84,11 +84,9 @@ export function CityPicker() {
 
   function blurHandler(e: React.FocusEvent<HTMLInputElement>) {
     if (!hold) setVisible(false);
-    console.log("onBlur");
   }
 
   function holdCancelHandler() {
-    console.log("window.onPointerUp");
     setHold(false);
     setVisible(false);
     if (!!window.PointerEvent)
@@ -101,7 +99,6 @@ export function CityPicker() {
 
   function holdHandler() {
     setHold(true);
-    console.log("onPointerDown");
     if (!!window.PointerEvent)
       window.addEventListener("pointerup", holdCancelHandler);
     else {
@@ -118,7 +115,6 @@ export function CityPicker() {
     setHold(false);
     setVisible(false);
     setAutocomplete(undefined);
-    console.log("onClick");
   }
 
   const autocompleteOpen =
@@ -197,7 +193,7 @@ export function CityPicker() {
       </button>
       {noResults && (
         <Paragraph className="sm:px-4 md:px-6 body2 text-white transform -translate-y-1">
-          No results
+          {t('noResults')}
         </Paragraph>
       )}
     </form>
