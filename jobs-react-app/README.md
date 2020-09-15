@@ -1,6 +1,6 @@
-# Jobs React App
+<a href="https://github-jobs-lac.vercel.app"><img alt="View Demo" src="https://img.shields.io/badge/%E2%96%B3-View%20Demo-black"/></a>
 
-[Demo in Production](https://github-jobs-lac.vercel.app)
+# 💼 Jobs React App
 
 > 🗒 **Assignment**
 >

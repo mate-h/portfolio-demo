@@ -29,3 +29,19 @@ ReactDOM.render(
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
+
+// Force refresh favicon when system color scheme changes
+function listener(e: MediaQueryListEvent) {
+  const link: HTMLLinkElement | null = document.querySelector(
+    "link[rel*='icon']"
+  );
+  if (link) {
+    const darkModeOn = e.matches;
+    link.href = "icon.svg" + (darkModeOn ? "?mode=dark" : "");
+  }
+}
+const darkModeMediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+try {
+  darkModeMediaQuery.addListener(listener);
+  darkModeMediaQuery.addEventListener("change", listener);
+} catch (e) {}

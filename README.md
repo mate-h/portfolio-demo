@@ -2,9 +2,9 @@
 
 This repository hosts demos for assigments in the job interviewing process.
 
-# Weather React App
+# 🌤 Weather React App
 
-[Demo in Production](https://weather-psi.vercel.app)
+<a href="https://weather-psi.vercel.app"><img alt="View Demo" src="https://img.shields.io/badge/%E2%96%B3-View%20Demo-black"/></a>
 
 > 🗒 **Assignment**
 >
@@ -12,9 +12,9 @@ This repository hosts demos for assigments in the job interviewing process.
 
 [Learn more](weather-react-app/README.md)
 
-# Jobs React App
+# 💼 Jobs React App
 
-[Demo in Production](https://github-jobs-lac.vercel.app)
+<a href="https://github-jobs-lac.vercel.app"><img alt="View Demo" src="https://img.shields.io/badge/%E2%96%B3-View%20Demo-black"/></a>
 
 > 🗒 **Assignment**
 >
@@ -26,7 +26,7 @@ This repository hosts demos for assigments in the job interviewing process.
 
 [Learn more](jobs-react-app/README.md)
 
-# Design Documentation
+# ✏️ Design Documentation
 
 > 🗒 **Assignment**
 >

@@ -1,6 +1,6 @@
-# Weather React App
+<a href="https://weather-psi.vercel.app"><img alt="View Demo" src="https://img.shields.io/badge/%E2%96%B3-View%20Demo-black"/></a>
 
-[Demo in Production](https://weather-psi.vercel.app)
+# 🌤 Weather React App
 
 > 🗒 **Assignment**
 >
