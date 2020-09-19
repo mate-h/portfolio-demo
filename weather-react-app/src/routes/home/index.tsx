@@ -24,7 +24,7 @@ function App() {
   return (
     <main
       style={backgroundStyle as any}
-      class={`${style['app-background']} ${style['home']} relative container mx-auto px-4 md:px-6`}
+      class={`${style['app-background']} py-14 relative container mx-auto px-4 md:px-6`}
     >
       <div
         style={{ top: 0, bottom: 0 }}
