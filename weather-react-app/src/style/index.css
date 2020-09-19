@@ -4,6 +4,8 @@
 
 @tailwind utilities;
 
+html,
+body,
 #app {
   height: 100%;
 }
@@ -413,4 +415,11 @@ input::-webkit-calendar-picker-indicator {
   width: 100vw;
   margin-left: -50vw;
   margin-right: -50vw;
+}
+
+.mapboxgl-control-container {
+  display: none;
+}
+.mapboxgl-canary {
+  background-color: salmon;
 }

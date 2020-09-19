@@ -10,6 +10,7 @@ import {
   Settings,
   CurrentPosition,
   CurrentWeather,
+  Mapbox,
 } from './containers';
 import { useState } from 'preact/hooks';
 
@@ -28,15 +29,17 @@ const App: FunctionalComponent = () => {
       <CurrentPosition.Provider>
         <CurrentWeather.Provider>
           <RouterContext.Provider value={contextValue}>
-            <div id="app">
-              <Header />
-              <Router onChange={handleRoute}>
-                <Route path="/" component={HomePage} />
-                <Route path="/map" component={MapPage} />
-                <Route path="/settings" component={SettingsPage} />
-                <NotFoundPage default />
-              </Router>
-            </div>
+            <Mapbox.Provider>
+              <div id="app">
+                <Header />
+                <Router onChange={handleRoute}>
+                  <Route path="/" component={HomePage} />
+                  <Route path="/map" component={MapPage} />
+                  <Route path="/settings" component={SettingsPage} />
+                  <NotFoundPage default />
+                </Router>
+              </div>
+            </Mapbox.Provider>
           </RouterContext.Provider>
         </CurrentWeather.Provider>
       </CurrentPosition.Provider>

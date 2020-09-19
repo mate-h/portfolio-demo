@@ -18,6 +18,9 @@ export const googleApiKey = process.env.SNOWPACK_PUBLIC_GOOGLE_API_KEY;
 export const geolocationApiRoot = `${process.env.SNOWPACK_PUBLIC_GOOGLE_APIS}/geolocation/v1/geolocate`;
 export const placesAutocompleteApiUrl = `${process.env.SNOWPACK_PUBLIC_GOOGLE_MAPS}/maps/api/place/autocomplete/json`;
 
+// Mapbox API condig
+export const mapboxToken = process.env.SNOWPACK_PUBLIC_MAPBOX_TOKEN;
+
 export type StatefulHook<T extends (...args: any) => any> = (
   options?: IncomingOptions,
   ...params: Parameters<T>
@@ -70,6 +73,7 @@ const lookup = {
   'map.fill': [56257, 56907],
   clock: [56257, 56363],
   'clock.fill': [56257, 56364],
+  'mappin.and.ellipse': [56256, 57259],
 
   cloud: [56256, 56770],
   'cloud.fill': [56256, 56771],

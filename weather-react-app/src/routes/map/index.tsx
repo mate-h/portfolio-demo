@@ -1,11 +1,15 @@
 import { FunctionalComponent, h } from 'preact';
+import { useRef } from 'preact/hooks';
+import { useMap } from '../../lib/hooks';
 
-const Settings: FunctionalComponent = () => {
+const MapPage: FunctionalComponent = () => {
+  const containerRef = useRef<HTMLDivElement>();
+  useMap({ container: containerRef });
   return (
-    <main class="container mx-auto py-14">
-      <p class="body2">Map</p>
+    <main class="h-full py-14 sm:pb-0">
+      <div ref={containerRef} class="h-full"></div>
     </main>
   );
 };
 
-export default Settings;
+export default MapPage;

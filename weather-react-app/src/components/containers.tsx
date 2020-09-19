@@ -1,6 +1,7 @@
+import type mapboxgl from 'mapbox-gl';
 import { ComponentChildren, createContext, h, FunctionComponent } from 'preact';
 import { route, RouterOnChangeArgs } from 'preact-router';
-import { useContext } from 'preact/hooks';
+import { useContext, useState } from 'preact/hooks';
 
 const EMPTY: unique symbol = Symbol();
 
@@ -48,6 +49,17 @@ export const CurrentWeather = createContainer(useLocationWeather);
 export const CurrentPosition = createContainer(usePosition);
 
 export const Settings = createContainer(useSettings);
+
+export const Mapbox = createContainer(() => {
+  const [mapbox, setMapbox] = useState<{
+    map?: mapboxgl.Map;
+    mapboxgl?: typeof mapboxgl;
+  }>({
+    map: undefined,
+    mapboxgl: undefined,
+  });
+  return { mapbox, setMapbox };
+});
 
 export const RouterContext = createContext<RouterOnChangeArgs | undefined>(
   undefined,

@@ -30,6 +30,9 @@ module.exports = {
       100: '1',
     },
     extend: {
+      margin: {
+        14: '3.5rem',
+      },
       padding: {
         14: '3.5rem',
       },
