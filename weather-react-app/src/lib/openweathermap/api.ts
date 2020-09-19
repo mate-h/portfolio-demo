@@ -21,7 +21,7 @@ const defaultParams: GetCurrentParams = {
 };
 
 export const route = (o: GetCurrentParams) =>
-  `?${new URLSearchParams(o as any)}`;
+  `?${new URLSearchParams(o as Record<string, string>)}`;
 
 export const useFetchCurrentWeather: StatefulHook<API['getCurrent']> = (
   options,
@@ -36,7 +36,7 @@ export const useFetchCurrentWeather: StatefulHook<API['getCurrent']> = (
   url.search = new URLSearchParams({
     ...defaultParams,
     ...params,
-  } as any).toString();
+  } as Record<string, string>).toString();
   return useFetch<GetCurrentResponse>(
     url.toString(),
     { ...weatherUpdateOptions, ...options },

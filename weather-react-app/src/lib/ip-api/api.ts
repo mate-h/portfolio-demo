@@ -24,10 +24,16 @@ export const useFetchGeolocation: StatefulHook<API['getGeolocation']> = (
 
   useEffect(() => {
     if (q) {
-      fetchHook.get(`/${q}?${new URLSearchParams(params as any).toString()}`);
+      fetchHook.get(
+        `/${q}?${new URLSearchParams(
+          params as Record<string, string>,
+        ).toString()}`,
+      );
     } else if (data) {
       fetchHook.get(
-        `/${data}?${new URLSearchParams(params as any).toString()}`,
+        `/${data}?${new URLSearchParams(
+          params as Record<string, string>,
+        ).toString()}`,
       );
     }
   }, [q, data]);

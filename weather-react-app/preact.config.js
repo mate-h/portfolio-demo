@@ -32,12 +32,17 @@ export default {
       // }
     });
 
+    const nodeEnv = {};
+    if (env.production) {
+      nodeEnv['process.env.NODE_ENV'] = 'production';
+    }
     const { plugin } = helpers.getPluginsByName(config, 'DefinePlugin')[0];
     Object.assign(
       plugin.definitions,
       Object.keys(parsed).reduce(
         (env, key) => ({
           ...env,
+          ...nodeEnv,
           [`process.env.${key}`]: JSON.stringify(parsed[key]),
         }),
         {},

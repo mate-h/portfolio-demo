@@ -24,9 +24,9 @@ const App: FunctionalComponent = () => {
   };
 
   return (
-    <Settings.Provider value={{} as any}>
-      <CurrentPosition.Provider value={{} as any}>
-        <CurrentWeather.Provider value={{} as any}>
+    <Settings.Provider>
+      <CurrentPosition.Provider>
+        <CurrentWeather.Provider>
           <RouterContext.Provider value={contextValue}>
             <div id="app">
               <Header />

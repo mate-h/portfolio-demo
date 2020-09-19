@@ -9,13 +9,14 @@ import { googleApiKey, placesAutocompleteApiUrl } from '../config';
 import { useFetchGeolocation } from '../ip-api/api';
 import { getLanguageKey } from '../languages';
 
-const defaultParams = {
+const defaultParams: Record<string, string> = {
   key: googleApiKey as string,
   types: '(cities)',
-  radius: 50000, // 50km
+  radius: '50000', // 50km
 };
 
-export const route = (o: any) => `?${new URLSearchParams(o)}`;
+export const route = (o: Record<string, string>) =>
+  `?${new URLSearchParams(o)}`;
 
 export type PlacesAutocompleteResponse = {
   status: string;
@@ -59,7 +60,7 @@ export function usePlaceAutocomplete(options?: IncomingOptions) {
 
   return {
     ...fetchHook,
-    route: (params: any) =>
+    route: (params: Record<string, string>) =>
       route({
         ...defaultParams,
         location,

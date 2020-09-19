@@ -22,7 +22,7 @@ export function CityPicker() {
   >(undefined);
 
   const value = useRef<string>();
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>();
   const {
     settings: { cities },
     updateSettings,
@@ -44,16 +44,16 @@ export function CityPicker() {
     debounceTime,
     { maxWait: debounceMaxWait },
   );
-  function handler(e: any) {
-    if (e.target.value !== '') {
-      value.current = e.target.value;
+  const handler: h.JSX.GenericEventHandler<HTMLInputElement> = (e) => {
+    if ((e.target as HTMLInputElement).value !== '') {
+      value.current = (e.target as HTMLInputElement).value;
       fetchAutocomplete();
     } else {
       setVisible(false);
       setAutocomplete(undefined);
     }
-  }
-  function clickHandler(e: any) {
+  };
+  const submitHandler: h.JSX.GenericEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
     if (value.current) {
@@ -74,14 +74,14 @@ export function CityPicker() {
         },
       );
     }
-  }
+  };
 
-  function focusHandler(e: any) {
-    e.target.select();
+  const focusHandler: h.JSX.FocusEventHandler<HTMLInputElement> = (e) => {
+    (e.target as HTMLInputElement).select();
     setVisible(true);
-  }
+  };
 
-  function blurHandler(e: any) {
+  function blurHandler() {
     if (!hold) setVisible(false);
   }
 
@@ -109,7 +109,7 @@ export function CityPicker() {
   function selectHandler(
     prediction: PlacesAutocompleteResponse['predictions'][0],
   ) {
-    if (inputRef) (inputRef as any).current.value = prediction.description;
+    inputRef.current.value = prediction.description;
     value.current = prediction.description;
     setHold(false);
     setVisible(false);
@@ -120,7 +120,7 @@ export function CityPicker() {
     visible && autocomplete && autocomplete.predictions.length > 0;
   return (
     <form
-      onSubmit={clickHandler}
+      onSubmit={submitHandler}
       class="inline-block sm:flex sm:flex-wrap exclude"
     >
       <label class="cursor-pointer relative z-10" htmlFor="city">
@@ -173,11 +173,6 @@ export function CityPicker() {
             ))}
           </ul>
         )}
-        {/* <datalist id="cities">
-          {autocomplete?.predictions.map((p: any) => (
-            <option key={p.place_id} value={p.description} />
-          ))}
-        </datalist> */}
       </span>
 
       <button

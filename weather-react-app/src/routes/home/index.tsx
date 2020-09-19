@@ -23,7 +23,7 @@ function App() {
   } = useContainer(Settings);
   return (
     <main
-      style={backgroundStyle as any}
+      style={backgroundStyle}
       class={`${style['app-background']} py-14 relative container mx-auto px-4 md:px-6`}
     >
       <div

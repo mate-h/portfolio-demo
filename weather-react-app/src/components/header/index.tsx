@@ -1,20 +1,17 @@
 import { FunctionalComponent, h } from 'preact';
-import Match from 'preact-router/match';
 import { icon } from '../../lib/config';
 import { useRouter } from '../containers';
-
-const m = Match as any;
 
 const Header: FunctionalComponent = () => {
   const [route, setRoute] = useRouter();
   const url = route?.url;
-  const handler = (e: Event) => {
-    const href = (e.target as any).getAttribute('href');
+  const handler: h.JSX.GenericEventHandler<HTMLAnchorElement> = (e) => {
+    const href = (e.target as HTMLAnchorElement).getAttribute('href');
     e.preventDefault();
 
     // do not push lateral routes onto history stack
     // replaces the current history entry
-    setRoute(href, true);
+    if (href) setRoute(href, true);
   };
   const linkStyle = { maxWidth: '10.5rem' };
   const linkComponent =

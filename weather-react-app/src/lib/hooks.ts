@@ -1,11 +1,11 @@
-import { window } from "ssr-window";
-import { useState, useEffect } from "preact/hooks";
-import {
-  useFetchCurrentWeather,
-  useFetchLocationWeather,
-} from "./openweathermap/api";
+import { window } from 'ssr-window';
+import { useState, useEffect, StateUpdater } from 'preact/hooks';
+import { useFetchLocationWeather } from './openweathermap/api';
 
-export function usePersistedState<T>(key: string, defaultValue?: any) {
+export function usePersistedState<T>(
+  key: string,
+  defaultValue: T,
+): [T, StateUpdater<T>, (overrideDefault?: T) => void] {
   const [state, setState] = useState<T>(() => {
     const item = window.localStorage?.getItem(key);
     if (item !== null && item !== undefined) {
@@ -18,60 +18,59 @@ export function usePersistedState<T>(key: string, defaultValue?: any) {
     if (state !== undefined)
       window.localStorage?.setItem(key, JSON.stringify(state));
   }, [key, state]);
-  function resetState(overrideDefault?: any) {
+  function resetState(overrideDefault?: T) {
     if (overrideDefault !== undefined) {
       setState(overrideDefault);
       window.localStorage?.setItem(key, JSON.stringify(overrideDefault));
-    } else if (defaultValue) {
-      setState(defaultValue);
-      window.localStorage?.setItem(key, JSON.stringify(defaultValue));
     } else {
-      setState(undefined as any);
-      window.localStorage?.removeItem(key);
+      setState(defaultValue);
+      if (defaultValue !== undefined) {
+        window.localStorage?.setItem(key, JSON.stringify(defaultValue));
+      } else {
+        window.localStorage?.removeItem(key);
+      }
     }
   }
-  return [
-    state as T,
-    setState as React.Dispatch<React.SetStateAction<T>>,
-    resetState,
-  ];
+  return [state, setState, resetState];
 }
 
 export function useLocationWeather() {
   return useFetchLocationWeather({}, {});
 }
 
+export type Settings = {
+  imperial: boolean;
+  locale: string;
+  cities: number[];
+};
+
 export function useSettings() {
-  const [settings, setSettings] = usePersistedState("app.settings", {
+  const [settings, setSettings] = usePersistedState<Settings>('app.settings', {
     imperial: false,
     locale: window.navigator?.language,
     cities: [],
   });
 
-  function updateSettings(newSettings: any) {
+  function updateSettings(newSettings: Partial<Settings>) {
     setSettings({
-      ...settings,
+      ...(settings as Settings),
       ...newSettings,
     });
   }
 
   return {
-    settings: settings as {
-      imperial: boolean;
-      locale: string;
-      cities: number[];
-    },
+    settings,
     updateSettings,
   };
 }
 
 export function usePosition() {
   const [permissionState, setPermissionState] = useState<PermissionState>(
-    "prompt"
+    'prompt',
   );
-  const [position, setPosition, resetPosition] = usePersistedState(
-    "app.lastPosition"
-  );
+  const [position, setPosition, resetPosition] = usePersistedState<
+    Position | undefined
+  >('app.lastPosition', undefined);
   const successCallback: PositionCallback = (position) => {
     const copy = {
       timestamp: position.timestamp,
@@ -85,7 +84,7 @@ export function usePosition() {
         speed: position.coords.speed,
       },
     };
-    setPosition(copy);
+    setPosition(copy as Position);
   };
   const errorCallback: PositionErrorCallback = (error) => {
     console.log(error);
@@ -103,19 +102,19 @@ export function usePosition() {
     try {
       navigator.permissions
         .query({
-          name: "geolocation",
+          name: 'geolocation',
         })
         .then(function (result) {
-          if (result.state === "granted") {
+          if (result.state === 'granted') {
             setPermissionState(result.state);
             navigator.geolocation.getCurrentPosition(
               successCallback,
               errorCallback,
-              {}
+              {},
             );
-          } else if (result.state === "prompt") {
+          } else if (result.state === 'prompt') {
             setPermissionState(result.state);
-          } else if (result.state === "denied") {
+          } else if (result.state === 'denied') {
             setPermissionState(result.state);
           }
           result.onchange = function () {
@@ -123,13 +122,13 @@ export function usePosition() {
           };
         });
     } catch (e) {
-      setPermissionState("prompt");
+      setPermissionState('prompt');
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
-    if (permissionState === "denied") {
+    if (permissionState === 'denied') {
       resetPosition();
     }
   }, [permissionState, resetPosition]);

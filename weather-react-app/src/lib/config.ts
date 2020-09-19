@@ -90,6 +90,8 @@ const lookup = {
   snow: [56256, 56805],
 };
 
-export const icon = (name: keyof typeof lookup) => {
-  return lookup[name].map((n: number) => String.fromCharCode(n)).join('');
+export type IconType = keyof typeof lookup;
+
+export const icon = (type: IconType) => {
+  return lookup[type].map((n: number) => String.fromCharCode(n)).join('');
 };

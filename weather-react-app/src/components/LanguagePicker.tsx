@@ -15,9 +15,9 @@ export function LanguagePicker({ class: className }: { class?: string }) {
 
   const value = supported.includes(locale) ? locale : getLanguageKey(locale);
 
-  const handler: h.JSX.GenericEventHandler<HTMLSelectElement> = (e: any) => {
+  const handler: h.JSX.GenericEventHandler<HTMLSelectElement> = (e) => {
     updateSettings({
-      locale: e.target.value,
+      locale: (e.target as HTMLSelectElement).value,
     });
   };
   return (

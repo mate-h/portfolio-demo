@@ -1,4 +1,4 @@
-import { ComponentChildren, createContext, h, PreactProvider } from 'preact';
+import { ComponentChildren, createContext, h, FunctionComponent } from 'preact';
 import { route, RouterOnChangeArgs } from 'preact-router';
 import { useContext } from 'preact/hooks';
 
@@ -10,7 +10,7 @@ export interface ContainerProviderProps<State = void> {
 }
 
 export interface Container<Value, State = void> {
-  Provider: PreactProvider<ContainerProviderProps<State>>;
+  Provider: FunctionComponent<ContainerProviderProps<State>>;
   useContainer: () => Value;
 }
 
