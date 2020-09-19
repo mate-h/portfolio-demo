@@ -1,15 +1,13 @@
-import React from "react";
-import { Paragraph } from "./Paragraph";
+import { h } from 'preact';
 import {
   supported,
   getLanguageKey,
   nativeNames,
   getEmoji,
-} from "../lib/languages";
-import { useContainer } from "unstated-next";
-import { Settings } from "..";
-import { t } from "../lib/translations";
-export function LanguagePicker({ className }: { className?: string }) {
+} from '../lib/languages';
+import { useContainer, Settings } from './containers';
+import { t } from '../lib/translations';
+export function LanguagePicker({ class: className }: { class?: string }) {
   const {
     settings: { locale },
     updateSettings,
@@ -17,24 +15,24 @@ export function LanguagePicker({ className }: { className?: string }) {
 
   const value = supported.includes(locale) ? locale : getLanguageKey(locale);
 
-  function handler(e: React.ChangeEvent<HTMLSelectElement>) {
+  const handler: h.JSX.GenericEventHandler<HTMLSelectElement> = (e: any) => {
     updateSettings({
       locale: e.target.value,
     });
-  }
+  };
   return (
-    <div className={["sm:flex sm:flex-wrap", className].join(" ")}>
-      <label className="cursor-pointer" htmlFor="language">
-        <Paragraph bottom={8} className="caption text-white">
-          {t("language", locale)}
-        </Paragraph>
+    <div class={['sm:flex sm:flex-wrap', className].join(' ')}>
+      <label class="cursor-pointer" htmlFor="language">
+        <p style={{ '--bottom': 8 }} class="caption text-white">
+          {t('language', locale)}
+        </p>
       </label>
 
-      <span className="button-states button-states-light dropdown dropdown-right-3 sm:dropdown-right-1 relative h-10 sm:h-6 mx-0 sm:mx-4 md:mx-6 inline-block">
+      <span class="button-states button-states-light dropdown dropdown-right-3 sm:dropdown-right-1 relative h-10 sm:h-6 mx-0 sm:mx-4 md:mx-6 inline-block">
         <select
           onChange={handler}
           value={value}
-          className="body1 sm:body2 bg-white transition-shadow duration-150 shadow-hairline shadow-hairline-light rounded h-10 sm:h-6 pr-10 px-4 sm:px-2 sm:pr-8 appearance-none outline-none focus:shadow-outline"
+          class="body1 sm:body2 bg-white transition-shadow duration-150 shadow-hairline shadow-hairline-light rounded h-10 sm:h-6 pr-10 px-4 sm:px-2 sm:pr-8 appearance-none outline-none focus:shadow-outline"
           name="language"
           id="language"
         >

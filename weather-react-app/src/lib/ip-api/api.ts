@@ -1,20 +1,20 @@
-import { API, GetGeolocationResponse } from "IPAPI";
-import { useEffect } from "react";
-import useFetch from "use-http";
+import type { API, GetGeolocationResponse } from 'IPAPI';
+import { useEffect } from 'preact/hooks';
+import useFetch from 'use-http';
 import {
   getGeolocationUrl,
   StatefulHook,
   defaultOptions,
   ipifyApiRoot,
-} from "../config";
+} from '../config';
 
-export const useFetchGeolocation: StatefulHook<API["getGeolocation"]> = (
+export const useFetchGeolocation: StatefulHook<API['getGeolocation']> = (
   options,
-  params
+  params,
 ) => {
   const q = params.query;
   const url = new URL(getGeolocationUrl());
-  delete params["query"];
+  delete params['query'];
   const fetchHook = useFetch<GetGeolocationResponse>(url.toString(), {
     ...defaultOptions,
     ...options,
@@ -27,7 +27,7 @@ export const useFetchGeolocation: StatefulHook<API["getGeolocation"]> = (
       fetchHook.get(`/${q}?${new URLSearchParams(params as any).toString()}`);
     } else if (data) {
       fetchHook.get(
-        `/${data}?${new URLSearchParams(params as any).toString()}`
+        `/${data}?${new URLSearchParams(params as any).toString()}`,
       );
     }
   }, [q, data]);

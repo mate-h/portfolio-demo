@@ -1,16 +1,15 @@
-import React, { useRef, useState } from "react";
-import { Paragraph } from "./Paragraph";
-import { debounceMaxWait, debounceTime, icon } from "../lib/config";
-import { useTranslation } from "../lib/translations";
-import { useContainer } from "unstated-next";
-import { Settings } from "..";
-import { useFetchQueryWeather } from "../lib/openweathermap/api";
-import { ErrorResponse, GetCurrentResponse } from "OpenWeatherMap";
-import debounce from "lodash.debounce";
+import { h } from 'preact';
+import { useRef, useState } from 'preact/hooks';
+import { debounceMaxWait, debounceTime, icon } from '../lib/config';
+import { useTranslation } from '../lib/translations';
+import { useContainer, Settings } from './containers';
+import { useFetchQueryWeather } from '../lib/openweathermap/api';
+import type { ErrorResponse, GetCurrentResponse } from 'OpenWeatherMap';
+import debounce from 'lodash.debounce';
 import {
   PlacesAutocompleteResponse,
   usePlaceAutocomplete,
-} from "../lib/maps-api/api";
+} from '../lib/maps-api/api';
 
 export function CityPicker() {
   const { t } = useTranslation();
@@ -19,8 +18,8 @@ export function CityPicker() {
   const [visible, setVisible] = useState(false);
   const [hold, setHold] = useState(false);
   const [autocomplete, setAutocomplete] = useState<
-    PlacesAutocompleteResponse
-  >();
+    PlacesAutocompleteResponse | undefined
+  >(undefined);
 
   const value = useRef<string>();
   const inputRef = useRef(null);
@@ -39,14 +38,14 @@ export function CityPicker() {
       getAutocomplete(
         routePlace({
           input: value.current,
-        })
+        }),
       );
     },
     debounceTime,
-    { maxWait: debounceMaxWait }
+    { maxWait: debounceMaxWait },
   );
-  function handler(e: React.ChangeEvent<HTMLInputElement>) {
-    if (e.target.value !== "") {
+  function handler(e: any) {
+    if (e.target.value !== '') {
       value.current = e.target.value;
       fetchAutocomplete();
     } else {
@@ -54,7 +53,7 @@ export function CityPicker() {
       setAutocomplete(undefined);
     }
   }
-  function clickHandler(e: React.FormEvent<HTMLFormElement>) {
+  function clickHandler(e: any) {
     e.preventDefault();
 
     if (value.current) {
@@ -72,17 +71,17 @@ export function CityPicker() {
               });
             }
           }
-        }
+        },
       );
     }
   }
 
-  function focusHandler(e: React.FocusEvent<HTMLInputElement>) {
+  function focusHandler(e: any) {
     e.target.select();
     setVisible(true);
   }
 
-  function blurHandler(e: React.FocusEvent<HTMLInputElement>) {
+  function blurHandler(e: any) {
     if (!hold) setVisible(false);
   }
 
@@ -90,25 +89,25 @@ export function CityPicker() {
     setHold(false);
     setVisible(false);
     if (!!window.PointerEvent)
-      window.removeEventListener("pointerup", holdCancelHandler);
+      window.removeEventListener('pointerup', holdCancelHandler);
     else {
-      window.removeEventListener("mouseup", holdCancelHandler);
-      window.removeEventListener("touchend", holdCancelHandler);
+      window.removeEventListener('mouseup', holdCancelHandler);
+      window.removeEventListener('touchend', holdCancelHandler);
     }
   }
 
   function holdHandler() {
     setHold(true);
     if (!!window.PointerEvent)
-      window.addEventListener("pointerup", holdCancelHandler);
+      window.addEventListener('pointerup', holdCancelHandler);
     else {
-      window.addEventListener("mouseup", holdCancelHandler);
-      window.addEventListener("touchend", holdCancelHandler);
+      window.addEventListener('mouseup', holdCancelHandler);
+      window.addEventListener('touchend', holdCancelHandler);
     }
   }
 
   function selectHandler(
-    prediction: PlacesAutocompleteResponse["predictions"][0]
+    prediction: PlacesAutocompleteResponse['predictions'][0],
   ) {
     if (inputRef) (inputRef as any).current.value = prediction.description;
     value.current = prediction.description;
@@ -122,25 +121,26 @@ export function CityPicker() {
   return (
     <form
       onSubmit={clickHandler}
-      className="inline-block sm:flex sm:flex-wrap exclude"
+      class="inline-block sm:flex sm:flex-wrap exclude"
     >
-      <label className="cursor-pointer relative z-10" htmlFor="city">
-        <Paragraph className="caption text-white">{t("cityName")}</Paragraph>
+      <label class="cursor-pointer relative z-10" htmlFor="city">
+        <p class="caption text-white">{t('cityName')}</p>
       </label>
 
       <span
-        className={`${
-          autocompleteOpen ? "up" : "button-states button-states-light"
+        class={`${
+          autocompleteOpen ? 'up' : 'button-states button-states-light'
         } dropdown dropdown-right-3 inline-block relative my-2 sm:my-0 mx-0 h-10 sm:h-6 sm:mx-4 md:mx-6`}
       >
         <input
+          type="search"
           ref={inputRef}
           onBlur={blurHandler}
           onFocus={focusHandler}
           onChange={handler}
           placeholder="Budapest"
-          className={`${
-            autocompleteOpen ? "rounded-b-none" : "focus:shadow-outline"
+          class={`${
+            autocompleteOpen ? 'rounded-b-none' : 'focus:shadow-outline'
           } truncate pr-10 sm:pr-8 body1 sm:body2 bg-white transition-shadow duration-150 shadow-hairline shadow-hairline-light h-10 sm:h-6 rounded px-4 sm:px-2 appearance-none outline-none`}
           // name="city"
           // id="city"
@@ -152,7 +152,7 @@ export function CityPicker() {
             onPointerDown={holdHandler}
             onMouseDown={!window.PointerEvent ? holdHandler : () => {}}
             onTouchStart={!window.PointerEvent ? holdHandler : () => {}}
-            className="py-4 sm:py-2 absolute z-30 mt-10 sm:mt-6 top-0 left-0 right-0 bg-white rounded-b shadow-hairline shadow-hairline-light"
+            class="py-4 sm:py-2 absolute z-30 mt-10 sm:mt-6 top-0 left-0 right-0 bg-white rounded-b shadow-hairline shadow-hairline-light"
           >
             {autocomplete?.predictions.map((p) => (
               <li
@@ -163,12 +163,12 @@ export function CityPicker() {
                 onTouchEnd={
                   !window.PointerEvent ? () => selectHandler(p) : () => {}
                 }
-                className="h-10 sm:h-auto px-4 sm:px-2 cursor-pointer overflow-hidden relative button-states button-states-light"
+                class="h-10 sm:h-auto px-4 sm:px-2 cursor-pointer overflow-hidden relative button-states button-states-light"
                 key={p.place_id}
               >
-                <Paragraph className="body1 sm:body2 text-black text-opacity-87 truncate transform sm:-translate-y-1">
+                <p class="body1 sm:body2 text-black text-opacity-87 truncate transform sm:-translate-y-1">
                   {p.description}
-                </Paragraph>
+                </p>
               </li>
             ))}
           </ul>
@@ -182,19 +182,19 @@ export function CityPicker() {
 
       <button
         type="submit"
-        className="transition-shadow duration-150 shadow-hairline shadow-hairline-light block h-10 sm:h-6 button-states button-states-dark relative overflow-hidden bg-primary rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
+        class="transition-shadow duration-150 shadow-hairline shadow-hairline-light block h-10 sm:h-6 button-states button-states-dark relative overflow-hidden bg-primary rounded px-4 sm:px-2 outline-none focus:outline-none focus:shadow-outline"
       >
-        <div className="h-10 sm:h-6 overflow-hidden">
-          <Paragraph className="sm:transform sm:-translate-y-2 subtitle2 text-white">
-            <i>{icon("plus")}</i>
-            {` ${t("addCity")}`}
-          </Paragraph>
+        <div class="h-10 sm:h-6 overflow-hidden">
+          <p class="sm:transform sm:-translate-y-2 subtitle2 text-white">
+            <i>{icon('plus')}</i>
+            {` ${t('addCity')}`}
+          </p>
         </div>
       </button>
       {noResults && (
-        <Paragraph className="sm:px-4 md:px-6 body2 text-white transform -translate-y-1">
+        <p class="sm:px-4 md:px-6 body2 text-white transform -translate-y-1">
           {t('noResults')}
-        </Paragraph>
+        </p>
       )}
     </form>
   );

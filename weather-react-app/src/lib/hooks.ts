@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { window } from "ssr-window";
+import { useState, useEffect } from "preact/hooks";
 import {
   useFetchCurrentWeather,
   useFetchLocationWeather,
@@ -6,26 +7,27 @@ import {
 
 export function usePersistedState<T>(key: string, defaultValue?: any) {
   const [state, setState] = useState<T>(() => {
-    const item = localStorage.getItem(key);
-    if (item !== null) {
+    const item = window.localStorage?.getItem(key);
+    if (item !== null && item !== undefined) {
       return JSON.parse(item);
     }
 
     return defaultValue;
   });
   useEffect(() => {
-    if (state !== undefined) localStorage.setItem(key, JSON.stringify(state));
+    if (state !== undefined)
+      window.localStorage?.setItem(key, JSON.stringify(state));
   }, [key, state]);
   function resetState(overrideDefault?: any) {
     if (overrideDefault !== undefined) {
       setState(overrideDefault);
-      localStorage.setItem(key, JSON.stringify(overrideDefault));
+      window.localStorage?.setItem(key, JSON.stringify(overrideDefault));
     } else if (defaultValue) {
       setState(defaultValue);
-      localStorage.setItem(key, JSON.stringify(defaultValue));
+      window.localStorage?.setItem(key, JSON.stringify(defaultValue));
     } else {
       setState(undefined as any);
-      localStorage.removeItem(key);
+      window.localStorage?.removeItem(key);
     }
   }
   return [
@@ -42,7 +44,7 @@ export function useLocationWeather() {
 export function useSettings() {
   const [settings, setSettings] = usePersistedState("app.settings", {
     imperial: false,
-    locale: navigator.language,
+    locale: window.navigator?.language,
     cities: [],
   });
 
@@ -64,7 +66,9 @@ export function useSettings() {
 }
 
 export function usePosition() {
-  const [permissionState, setPermissionState] = useState<PermissionState>();
+  const [permissionState, setPermissionState] = useState<PermissionState>(
+    "prompt"
+  );
   const [position, setPosition, resetPosition] = usePersistedState(
     "app.lastPosition"
   );
