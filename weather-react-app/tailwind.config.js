@@ -1,7 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
-console.log(process.env.NODE_ENV);
-
 module.exports = {
   future: {
     removeDeprecatedGapUtilities: true,

@@ -9,7 +9,7 @@ import { LanguagePicker } from '../../components/LanguagePicker';
 import { CityPicker } from '../../components/CityPicker';
 import { useTranslation } from '../../lib/translations';
 import { useContainer, Settings } from '../../components/containers';
-import style from './style.module.css';
+import './style.css';
 
 function App() {
   const backgroundStyle = {
@@ -24,13 +24,10 @@ function App() {
   return (
     <main
       style={backgroundStyle}
-      class={`${style['app-background']} py-14 relative container mx-auto px-4 md:px-6`}
+      class="app-background py-14 relative container mx-auto px-4 md:px-6"
     >
-      <div
-        style={{ top: 0, bottom: 0 }}
-        class={`${style['baseliner']} exclude -my-4 md:-my-6`}
-      />
-      <LocationBanner class={style['exclude']} />
+      <div class="baseliner exclude inset-y-0" />
+      <LocationBanner class="exclude" />
       <LanguagePicker class="relative my-4 md:my-6" />
       <p class="headline5 sm:headline4 text-white transform -translate-y-1">
         {t('title')}
@@ -49,7 +46,7 @@ function App() {
           </i>
         </p>
         <div class={gridComponent}>
-          <WeatherLocationCard class={style['app-background-cover']} />
+          <WeatherLocationCard class="app-background-cover" />
         </div>
       </div>
       <CityPicker />
@@ -62,7 +59,7 @@ function App() {
           <div class={gridComponent}>
             {cities.map((id) => (
               <WeatherCityCard
-                class={style['app-background-cover']}
+                class="app-background-cover"
                 key={id}
                 cityId={id}
               />
