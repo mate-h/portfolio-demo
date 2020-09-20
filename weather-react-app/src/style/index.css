@@ -335,18 +335,22 @@ i[tabindex] {
 
 @responsive {
   .dropdown-right-1::after {
-    right: 0.25rem;
+    right: 0;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
   }
   .dropdown-right-2::after {
-    right: 0.5rem;
+    right: 0;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
   }
   .dropdown-right-3::after {
-    right: 0.75rem;
+    right: 0;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
   }
 }
-.dropdown.up::after {
-  content: '\100187';
-}
+
 .dropdown::after {
   content: '\100188';
   font-family: 'SF Icons';
@@ -365,6 +369,12 @@ i[tabindex] {
 
 input::-webkit-calendar-picker-indicator {
   display: none;
+}
+
+input::-webkit-search-cancel-button {
+  display: none;
+  appearance: none;
+  -webkit-appearance: none;
 }
 
 .button-states::before {

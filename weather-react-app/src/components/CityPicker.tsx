@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useRef, useState } from 'preact/hooks';
+import { useEffect, useRef, useState } from 'preact/hooks';
 import { debounceMaxWait, debounceTime, icon } from '../lib/config';
 import { useTranslation } from '../lib/translations';
 import { useContainer, Settings } from './containers';
@@ -17,6 +17,7 @@ export function CityPicker() {
   const [noResults, setNoResults] = useState(false);
   const [visible, setVisible] = useState(false);
   const [hold, setHold] = useState(false);
+  const [empty, setEmpty] = useState(true);
   const [autocomplete, setAutocomplete] = useState<
     PlacesAutocompleteResponse | undefined
   >(undefined);
@@ -48,7 +49,9 @@ export function CityPicker() {
     if ((e.target as HTMLInputElement).value !== '') {
       value.current = (e.target as HTMLInputElement).value;
       fetchAutocomplete();
+      setEmpty(false);
     } else {
+      setEmpty(true);
       setVisible(false);
       setAutocomplete(undefined);
     }
@@ -77,7 +80,7 @@ export function CityPicker() {
   };
 
   const focusHandler: h.JSX.FocusEventHandler<HTMLInputElement> = (e) => {
-    (e.target as HTMLInputElement).select();
+    // (e.target as HTMLInputElement).select();
     setVisible(true);
   };
 
@@ -116,6 +119,14 @@ export function CityPicker() {
     setAutocomplete(undefined);
   }
 
+  function clearHandler() {
+    inputRef.current.value = '';
+    setEmpty(true);
+    inputRef.current.focus();
+    setVisible(false);
+    setAutocomplete(undefined);
+  }
+
   const autocompleteOpen =
     visible && autocomplete && autocomplete.predictions.length > 0;
   return (
@@ -129,8 +140,8 @@ export function CityPicker() {
 
       <span
         class={`${
-          autocompleteOpen ? 'up' : 'button-states button-states-light'
-        } dropdown dropdown-right-3 inline-block relative my-2 sm:my-0 mx-0 h-10 sm:h-6 sm:mx-4 md:mx-6`}
+          autocompleteOpen ? '' : 'button-states button-states-light'
+        } inline-block relative my-2 sm:my-0 mx-0 h-10 sm:h-6 sm:mx-4 md:mx-6`}
       >
         <input
           type="search"
@@ -142,11 +153,22 @@ export function CityPicker() {
           class={`${
             autocompleteOpen ? 'rounded-b-none' : 'focus:shadow-outline'
           } truncate pr-10 sm:pr-8 body1 sm:body2 bg-white transition-shadow duration-150 shadow-hairline shadow-hairline-light h-10 sm:h-6 rounded px-4 sm:px-2 appearance-none outline-none`}
-          // name="city"
-          // id="city"
-          // list="cities"
           autoComplete="off"
         />
+        <i
+          onClick={clearHandler}
+          class={`${
+            empty
+              ? ''
+              : 'cursor-pointer pointer-events-auto button-states button-states-light'
+          } pointer-events-none absolute right-0 text-xs inset-y-0 flex items-center justify-center w-10 sm:w-8 text-black text-opacity-54`}
+        >
+          {empty
+            ? autocompleteOpen
+              ? icon('chevron.up')
+              : icon('chevron.down')
+            : icon('xmark')}
+        </i>
         {autocompleteOpen && (
           <ul
             onPointerDown={holdHandler}

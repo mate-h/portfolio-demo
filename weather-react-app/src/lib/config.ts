@@ -62,6 +62,7 @@ const lookup = {
   minus: [56256, 56701],
   'trash.fill': [56256, 56850],
   circle: [56256, 56320],
+  xmark: [56256, 56708],
   'xmark.circle.fill': [56256, 56417],
   'circle.lefthalf.fill': [56256, 56322],
   'circle.righthalf.fill': [56256, 56323],
