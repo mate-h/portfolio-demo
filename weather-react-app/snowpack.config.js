@@ -7,5 +7,5 @@ module.exports = {
     react: 'preact/compat',
     'react-dom': 'preact/compat',
   },
-  plugins: ['@snowpack/plugin-postcss'],
+  plugins: ['@snowpack/plugin-webpack', '@snowpack/plugin-postcss'],
 };

@@ -1,46 +1,26 @@
 {
   "private": true,
-  "name": "pwa-starter",
-  "version": "0.0.0",
+  "name": "weather-react-app",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "export NODE_ENV=production && preact build --babelConfig preact.babelrc",
+    "build": "snowpack build",
+    "postbuild": "react-snap",
     "serve": "sirv build --port 8080 --cors --single",
-    "start": "snowpack dev",
-    "dev": "preact watch --babelConfig preact.babelrc",
-    "lint": "eslint src",
-    "test": "jest",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\""
-  },
-  "eslintConfig": {
-    "extends": "preact",
-    "ignorePatterns": [
-      "build/"
-    ]
+    "start": "snowpack dev"
   },
   "devDependencies": {
     "@snowpack/app-scripts-preact": "^1.8.8",
     "@snowpack/plugin-postcss": "^1.0.4",
-    "@types/enzyme": "^3.10.6",
-    "@types/jest": "^26.0.14",
+    "@snowpack/plugin-webpack": "^2.0.12",
     "@types/lodash.debounce": "^4.0.6",
     "@types/mapbox-gl": "^1.12.0",
     "@types/platform": "^1.3.3",
-    "@types/webpack-env": "^1.15.2",
-    "@typescript-eslint/eslint-plugin": "^4.1.1",
-    "@typescript-eslint/parser": "^4.1.1",
-    "dotenv-safe": "^8.2.0",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-preact-pure": "^2.0.0",
-    "eslint": "^7.9.0",
-    "eslint-config-preact": "^1.1.0",
-    "jest": "^26.4.2",
-    "jest-preset-preact": "^4.0.2",
     "postcss": "^8.0.5",
     "postcss-cli": "^7.1.2",
-    "preact-cli": "^3.0.0",
+    "preact-cli": "^3.0.2",
     "prettier": "^2.1.2",
-    "servor": "^4.0.2",
+    "react-snap": "^1.23.0",
     "sirv-cli": "^1.0.6",
     "snowpack": "^2.11.1",
     "ssr-window": "^2.0.0",
@@ -55,12 +35,5 @@
     "preact-router": "^3.2.1",
     "tailwindcss": "^1.8.10",
     "use-http": "^1.0.13"
-  },
-  "jest": {
-    "preset": "jest-preset-preact",
-    "setupFiles": [
-      "<rootDir>/tests/__mocks__/browserMocks.js",
-      "<rootDir>/tests/__mocks__/setupTests.js"
-    ]
   }
 }
