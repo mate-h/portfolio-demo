@@ -1,5 +1,5 @@
 import { h } from 'preact';
-import { useEffect, useRef, useState } from 'preact/hooks';
+import { useRef, useState } from 'preact/hooks';
 import { debounceMaxWait, debounceTime, icon } from '../lib/config';
 import { useTranslation } from '../lib/translations';
 import { useContainer, Settings } from './containers';
