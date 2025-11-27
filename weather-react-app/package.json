@@ -18,7 +18,7 @@
     "@types/platform": "^1.3.3",
     "postcss": "^8.0.5",
     "postcss-cli": "^7.1.2",
-    "preact-cli": "^3.0.2",
+    "preact-cli": "^3.5.1",
     "prettier": "^2.1.2",
     "react-snap": "^1.23.0",
     "sirv-cli": "^1.0.6",
